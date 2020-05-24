@@ -1,0 +1,96 @@
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.sidenav-items {
+  padding: 60px 0px 10px;
+}
+
+.hidden {
+  transition: 0.5s;
+  overflow-x: hidden;
+  display: none;
+}
+
+.sidenav-container {
+  background-color: #f03840;
+  background-image: linear-gradient(to left, #ec1e37, #f03840);
+}
+
+.sidenav .close-btn i {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 26px;
+  margin-top: 20px;
+  margin-left: 50px;
+  color: #ffffff;
+  display: block;
+  cursor: pointer;
+}
+
+.sidenav-line {
+  margin: 0px 20px;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+}
+
+.sidenav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 20px;
+}
+
+.sidenav-menu a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #ffffff;
+  display: block;
+  transition: 0.3s;
+}
+
+.close-btn i:hover,
+.sidenav-menu a:hover {
+  color: #bdbdbd;
+}
+
+.sidenav-button {
+  display: block;
+  padding: 20px;
+}
+
+.sidenav-button button {
+  background-color: #f03840;
+  background-image: linear-gradient(to left, #ec1e37, #f03840);
+  border-radius: 6px;
+  padding: 15px;
+  width: 100%;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.sidenav-button button:hover {
+  background-color: #a5272d;
+  background-image: linear-gradient(to right, #f03840, #a5272d);
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav-items {
+    padding-top: 60px;
+  }
+
+  .sidenav a {
+    font-size: 12pt;
+  }
+}
