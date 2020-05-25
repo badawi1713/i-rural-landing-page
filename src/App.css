@@ -31,9 +31,9 @@ html {
     width: 100%;
     z-index: 1;
     position: fixed;
-    -webkit-box-shadow: 0px 13px 10px 0px rgba(0, 0, 0, 0.06);
-    -moz-box-shadow: 0px 13px 10px 0px rgba(0, 0, 0, 0.06);
-    box-shadow: 0px 13px 10px 0px rgba(0, 0, 0, 0.06);
+    -webkit-box-shadow: 0px 7px 34px rgba(0, 0, 0, 0.07);
+    -moz-box-shadow: 0px 7px 34px rgba(0, 0, 0, 0.07);
+    box-shadow: 0px 7px 34px rgba(0, 0, 0, 0.07);
 }
 
 header {
@@ -44,7 +44,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 10px 25px;
     align-items: center;
 }
 
@@ -60,8 +60,8 @@ header {
 
 .sidebar-button span i {
     cursor: pointer;
-    color: #ec1e37;
-    font-size: 20pt;
+    color: #EF454C;
+    font-size: 25px;
 }
 
 .navbar-menu {
@@ -77,7 +77,7 @@ header {
 }
 
 .hero-section {
-    background-color: #ec1e37;
+    background-color: #EF454C;
     background-image: linear-gradient(90deg,
             rgba(0, 0, 0, 0.6) 3.75%,
             rgba(0, 0, 0, 0.357022) 65.43%,
@@ -87,40 +87,51 @@ header {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: 310px;
+    height: auto;
     max-width: 100%;
 }
 
 .hero-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 100%;
-    padding: 20px;
+    display: grid;
+    gap: 26px;
+    padding: 50px 25px;
+
 }
 
-.hero-container h1 {
-    font-size: 24px;
+.hero-container .hero-title p {
+    font-style: normal;
     font-weight: bold;
-    color: #ffffff;
+    font-size: 28px;
+    color: #FFFFFF;
+    line-height: 34px;
 }
 
 .hero-container p {
-    font-size: 100%;
-    color: #ffffff;
-    line-height: 20px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 25px;
+    color: #FFFFFF;
+    text-transform: capitalize;
+}
+
+.hero-button {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 15px;
 }
 
 .hero-button button {
-    background-color: #ec1e37;
-    background-image: linear-gradient(to right, #ec1e37, #ac2222);
+    background-color: #F03840;
+    background: linear-gradient(119.16deg, #ED5F64 0%, #F03840 100%);
     border-radius: 6px;
-    padding: 5px 10px;
-    margin-right: 10px;
+    padding: 15px 60px;
     width: auto;
-    height: 35px;
     color: #ffffff;
-    font-size: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
     cursor: pointer;
 }
 
@@ -134,6 +145,12 @@ header {
 .information-content {
     display: grid;
     grid-template-rows: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.configuration-content {
+    display: grid;
+    grid-template-rows: 1fr;
     gap: 15px;
 }
 
@@ -171,108 +188,19 @@ header {
     color: #78788c;
 }
 
-.packet-section {
-    background-color: #456dfc;
-    background-image: linear-gradient(310.33deg, #456dfc -1.85%, #62b2ff 100%);
-}
-
-.packet-container {
-    padding: 40px 20px;
-}
-
-.packet-header h1 {
-    text-align: center;
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 30px;
-    margin-bottom: 40px;
-}
-
-.product-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
-
-.product-card {
-    background-color: #ffffff;
-    box-shadow: 0px 0px 44px rgba(0, 0, 0, 0.12);
-    border-radius: 6px;
-    width: 100%;
-    height: 100%;
-    padding: 30px 10px;
-    text-align: center;
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.price-info,
-.isp-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.price-info h2 {
-    font-weight: bold;
-    font-size: 33px;
-    color: #f03840;
-}
-
-.price-info h4 {
-    font-size: 18px;
-}
-
-.price-info h5 {
-    font-size: 13px;
-}
-
-.isp-info p,
-.product-card p {
-    font-weight: 600;
-    font-size: 18px;
-    color: #29293e;
-}
-
-.speed-info {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: baseline;
-    margin-bottom: 20px;
-}
-
-.speed-info h1 {
-    font-size: 50px;
-    font-weight: bold;
-    margin-right: 5px;
-}
-
-.speed-info h2 {
-    font-size: 25px;
-    color: #29293e;
-}
-
-.configuration-container {
-    padding: 40px 20px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-}
-
 .configuration-steps h1 {
     font-weight: bold;
     font-size: 28px;
     color: #29293e;
 }
 
-.configuration-list h2 {
+.configuration-list p:nth-child(1) {
+    font-weight: 600;
+    font-size: 20px;
     color: #29293e;
 }
 
-.configuration-list p {
+.configuration-list p:nth-child(2) {
     font-size: 100%;
     color: #78788c;
 }
@@ -291,10 +219,12 @@ header {
 }
 
 .contact-container {
-    padding: 40px 20px;
-    display: flex;
+    padding: 40px 25px;
+    display: grid;
     align-items: center;
     justify-content: center;
+    gap: 15px;
+
 }
 
 .contact-number {
@@ -303,38 +233,44 @@ header {
     align-items: center;
 }
 
-.contact-number h1 {
+.contact-number p:nth-child(2) {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 25px;
     color: #ffffff;
 }
 
-.contact-number h2 {
-    font-size: 16px;
+.contact-number p:nth-child(1) {
+    font-size: 17px;
     color: #ffffff;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .whatsapp-button {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.whatsapp-button button {
     background-color: #52ce5f;
     background-image: linear-gradient(90deg, #52ce5f 70.31%, #29b53f 100%);
     border-radius: 6px;
     display: flex;
-    padding: 5px 5px;
-    width: auto;
+    padding: 15px;
+    width: 55%;
     align-items: center;
+    align-self: center;
     justify-content: space-between;
-    cursor: pointer;
 }
 
-.whatsapp-button img {
-    width: 18px;
+.whatsapp-button button img {
+    width: 24px;
 }
 
-.whatsapp-button p {
-    margin-right: 5px;
+.whatsapp-button button p {
     font-weight: bold;
-    font-size: 12px;
+    font-size: 16px;
     color: #ffffff;
 }
 
@@ -384,29 +320,11 @@ header {
         direction: rtl;
     }
 
-    .product-container {
+    .configuration-content {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-    }
-
-    .product-card {
-        background-color: #ffffff;
-        box-shadow: 0px 0px 44px rgba(0, 0, 0, 0.12);
-        border-radius: 6px;
-        height: 100%;
-        padding: 30px 10px;
-        text-align: center;
-        display: grid;
-        grid-template-rows: repeat(2, 1fr);
-        gap: 40px;
-    }
-
-    .configuration-container {
-        padding: 40px 20px;
-        display: grid;
+        grid-template-rows: none;
         grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
+        gap: 20px;
     }
 
     .contact-number {
@@ -415,35 +333,35 @@ header {
         align-items: center;
     }
 
-    .contact-number h1 {
+    .contact-number p:nth-child(2) {
         font-weight: bold;
         font-size: 30px;
         color: #ffffff;
     }
 
-    .contact-number h2 {
+    .contact-number p:nth-child(1) {
         font-size: 30px;
         color: #ffffff;
         margin-right: 5px;
     }
 
-    .whatsapp-button {
+    .whatsapp-button button {
         background-color: #52ce5f;
         background-image: linear-gradient(90deg, #52ce5f 70.31%, #29b53f 100%);
         border-radius: 6px;
         display: flex;
-        padding: 20px 30px;
-        width: 250px;
+        padding: 15px 25px;
+        width: 200px;
         align-items: center;
         justify-content: space-between;
         cursor: pointer;
     }
 
-    .whatsapp-button img {
+    .whatsapp-button button img {
         width: 32px;
     }
 
-    .whatsapp-button p {
+    .whatsapp-button button p {
         font-weight: bold;
         font-size: 20px;
         color: #ffffff;
@@ -503,37 +421,43 @@ header {
     }
 
     .hero-section {
-        height: 670px;
+        padding: 130px 100px;
+        height: 700px;
+        width: 100%;
     }
 
     .hero-container {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: space-around;
+        gap: 30px;
         height: 100%;
-        padding: 150px 100px;
     }
 
-    .hero-container h1 {
-        width: 60%;
-
+    .hero-container .hero-title p {
+        width: 55%;
+        font-weight: bolder;
         font-size: 45px;
+        line-height: 61px;
     }
 
     .hero-container p {
-        width: 55%;
+        width: 53%;
         font-size: 20px;
-        line-height: 32px;
+        line-height: 36px;
+
+        text-transform: capitalize;
+    }
+
+    .hero-button {
+        display: block;
     }
 
     .hero-button button {
-        padding: 15px 40px;
-        margin-right: 20px;
+        padding: 15px 25px;
+        margin-right: 25px;
         width: auto;
-        height: 60px;
         color: #ffffff;
-        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
         cursor: pointer;
     }
 
@@ -572,97 +496,14 @@ header {
 
     .text-information h1 {
         font-size: 30px;
+        font-weight: bold;
         margin-bottom: 25px;
     }
 
     .text-information p {
+        font-weight: normal;
         font-size: 20px;
         line-height: 32px;
-    }
-
-    .packet-container {
-        padding: 40px 100px;
-    }
-
-    .packet-header h1 {
-        text-align: center;
-        color: #ffffff;
-        font-weight: bold;
-        font-size: 30px;
-        margin-bottom: 40px;
-    }
-
-    .product-container {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-    }
-
-    .product-card {
-        background-color: #ffffff;
-        box-shadow: 0px 0px 44px rgba(0, 0, 0, 0.12);
-        border-radius: 6px;
-        height: 100%;
-        padding: 30px 10px;
-        text-align: center;
-        display: grid;
-        grid-template-rows: repeat(2, 1fr);
-        gap: 40px;
-    }
-
-    .price-info,
-    .isp-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .price-info h2 {
-        font-weight: bold;
-        font-size: 33px;
-        color: #f03840;
-    }
-
-    .price-info h4 {
-        font-size: 18px;
-    }
-
-    .price-info h5 {
-        font-size: 13px;
-    }
-
-    .isp-info p,
-    .product-card p {
-        font-weight: 600;
-        font-size: 18px;
-        color: #29293e;
-    }
-
-    .speed-info {
-        display: flex;
-        text-align: center;
-        justify-content: center;
-        align-items: baseline;
-        margin-bottom: 20px;
-    }
-
-    .speed-info h1 {
-        font-size: 50px;
-        font-weight: bold;
-        margin-right: 5px;
-    }
-
-    .speed-info h2 {
-        font-size: 25px;
-        color: #29293e;
-    }
-
-    .configuration-container {
-        padding: 40px 100px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
     }
 
     .configuration-steps h1 {
@@ -675,7 +516,7 @@ header {
         margin-top: 20px;
     }
 
-    .configuration-list p {
+    .configuration-list p:nth-child(2) {
         font-size: 20px;
         line-height: 32px;
     }
@@ -691,7 +532,7 @@ header {
     }
 
     .contact-container {
-        padding: 40px 100px;
+        padding: 60px 100px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -703,35 +544,35 @@ header {
         align-items: center;
     }
 
-    .contact-number h1 {
+    .contact-number p:nth-child(2) {
         font-weight: bold;
-        font-size: 30px;
+        font-size: 45px;
         color: #ffffff;
     }
 
-    .contact-number h2 {
+    .contact-number p:nth-child(1) {
         font-size: 30px;
         color: #ffffff;
         margin-right: 5px;
     }
 
-    .whatsapp-button {
+    .whatsapp-button button {
         background-color: #52ce5f;
         background-image: linear-gradient(90deg, #52ce5f 70.31%, #29b53f 100%);
         border-radius: 6px;
         display: flex;
-        padding: 20px 30px;
-        width: 250px;
+        padding: 15px 25px;
+        width: 200px;
         align-items: center;
         justify-content: space-between;
         cursor: pointer;
     }
 
-    .whatsapp-button img {
+    .whatsapp-button button img {
         width: 32px;
     }
 
-    .whatsapp-button p {
+    .whatsapp-button button p {
         font-weight: bold;
         font-size: 20px;
         color: #ffffff;
@@ -764,72 +605,5 @@ header {
         font-size: 20px;
         color: #29293e;
     }
-
-    .form-section {
-        width: 100%;
-        height: 100%;
-        padding: 150px 250px 50px 250px;
-
-    }
-
-    /* .form-section-container {} */
-
-    .form-header {
-        display: grid;
-        grid-template-rows: repeat(2, 1fr);
-        gap: 20px;
-    }
-
-    .form-header .register-btn button {
-        background-color: #ec1e37;
-        background-image: linear-gradient(to right, #ec1e37, #ac2222);
-        border-radius: 6px;
-        padding: 5px 10px;
-        margin-right: 10px;
-        width: auto;
-        height: 35px;
-        color: #ffffff;
-        font-size: 12px;
-        cursor: pointer;
-    }
-
-    .form-body {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .form-data {
-        flex-direction: column;
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .form-input {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-
-    .form-address-group {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-
-    .form-input-group div input {
-        width: 100%;
-    }
-
-    .form-input-group label {
-        display: flex;
-        align-items: center;
-    }
-
-    .form-input-group label span {
-        margin-right: 10px;
-    }
-
 
 }

@@ -6,12 +6,14 @@ const Contact = () => {
     <section id="contact" className="contact-section">
       <div className="contact-container">
         <div className="contact-number">
-          <h2>Kontak Kami : </h2>
-          <h1>08112614565</h1>
+          <p>Kontak Kami : </p>
+          <p>08112614565</p>
         </div>
         <div className="whatsapp-button">
-          <p>WHATSAPP</p>
-          <img src={WhatsappIcon} alt="whatsapp-logo" />
+          <button>
+            <p>WHATSAPP</p>
+            <img src={WhatsappIcon} alt="whatsapp-logo" />
+          </button>
         </div>
       </div>
     </section>

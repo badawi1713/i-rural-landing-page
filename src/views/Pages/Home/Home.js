@@ -4,8 +4,7 @@ import SideBar from "../../Components/SideBar/SideBar";
 import NavBar from "../../Components/NavBar/NavBar";
 import Header from "../../Components/Header/Header";
 import Information from "../../Components/Information/Information";
-import Packet from "../../Components/Packet/Packet";
-import Configure from "../../Components/Configure/Configure";
+// import Configure from "../../Components/Configure/Configure";
 import Contact from "../../Components/Contact/Contact";
 import Footer from "../../Components/Footer/Footer";
 
@@ -27,8 +26,6 @@ const HomePage = () => {
           <Header />
           <main>
             <Information />
-            <Packet />
-            <Configure />
             <Contact />
           </main>
           <Footer />

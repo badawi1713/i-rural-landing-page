@@ -46,18 +46,6 @@ const Navbar = ({ openNav }) => {
               <li>
                 <Scroll
                   activeClass="active"
-                  to="packet"
-                  spy={true}
-                  smooth={true}
-                  offset={-100}
-                  duration={30}
-                >
-                  <Link to={"/"}>Paket</Link>
-                </Scroll>
-              </li>
-              <li>
-                <Scroll
-                  activeClass="active"
                   to="configuration"
                   spy={true}
                   smooth={true}
