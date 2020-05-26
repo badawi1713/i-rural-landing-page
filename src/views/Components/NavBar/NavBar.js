@@ -70,7 +70,7 @@ const Navbar = ({ openNav }) => {
             </ul>
           </div>
           <div className="navbar-button">
-            <Link to={"/"}>
+            <Link to={"/register"}>
               <button>Daftar I-RURAL</button>
             </Link>
           </div>

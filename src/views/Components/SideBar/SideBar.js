@@ -1,6 +1,6 @@
 import React from "react";
-
-import { Link } from "react-scroll";
+import { Link as Scroll } from "react-scroll";
+import { Link } from "react-router-dom";
 
 import "./SideBar.css";
 
@@ -16,7 +16,7 @@ const SideBar = () => {
         </span>
         <div className="sidenav-items">
           <div className="sidenav-menu">
-            <Link
+            <Scroll
               style={{ cursor: "pointer" }}
               activeClass="active"
               to="home"
@@ -26,12 +26,12 @@ const SideBar = () => {
               duration={30}
               onClick={() => closeNav()}
             >
-              Beranda
-            </Link>
+              <Link to={"/"}>Beranda</Link>
+            </Scroll>
           </div>
           <hr className="sidenav-line" />
           <div className="sidenav-menu">
-            <Link
+            <Scroll
               style={{ cursor: "pointer" }}
               activeClass="active"
               to="description"
@@ -41,42 +41,28 @@ const SideBar = () => {
               duration={30}
               onClick={() => closeNav()}
             >
-              Deskripsi
-            </Link>
+              <Link to={"/"}>Deskripsi</Link>
+            </Scroll>
           </div>
+
           <hr className="sidenav-line" />
           <div className="sidenav-menu">
-            <Link
-              style={{ cursor: "pointer" }}
-              activeClass="active"
-              to="packet"
-              spy={true}
-              smooth={true}
-              offset={-50}
-              duration={30}
-              onClick={() => closeNav()}
-            >
-              Paket
-            </Link>
-          </div>
-          <hr className="sidenav-line" />
-          <div className="sidenav-menu">
-            <Link
+            <Scroll
               style={{ cursor: "pointer" }}
               activeClass="active"
               to="configuration"
               spy={true}
               smooth={true}
-              offset={-50}
+              offset={-70}
               duration={30}
               onClick={() => closeNav()}
             >
-              Konfigurasi
-            </Link>
+              <Link to={"/"}>Konfigurasi</Link>
+            </Scroll>
           </div>
           <hr className="sidenav-line" />
           <div className="sidenav-menu">
-            <Link
+            <Scroll
               style={{ cursor: "pointer" }}
               activeClass="active"
               to="contact"
@@ -86,14 +72,16 @@ const SideBar = () => {
               duration={30}
               onClick={() => closeNav()}
             >
-              Kontak
-            </Link>
+              <Link to={"/"}>Kontak</Link>
+            </Scroll>
           </div>
         </div>
       </div>
 
       <div className="sidenav-button">
-        <button>Daftar I-RURAL</button>
+        <Link to={"/register"}>
+          <button>Daftar I-RURAL</button>
+        </Link>
       </div>
     </div>
   );

@@ -58,7 +58,7 @@
 .close-btn i:hover,
 .sidenav-menu a:hover {
   color: #29293E;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .sidenav-button {
@@ -67,19 +67,15 @@
 }
 
 .sidenav-button button {
-  background-color: #f03840;
-  background-image: linear-gradient(to left, #ec1e37, #f03840);
+  background-color: #ed5f64;
+  background-image: linear-gradient(110.27deg, #ed5f64 0%, #f03840 100%);
   border-radius: 6px;
-  padding: 15px;
+  padding: 15px 25px;
   width: 100%;
   color: #ffffff;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 20px;
   cursor: pointer;
-}
-
-.sidenav-button button:hover {
-  background-color: #a5272d;
-  background-image: linear-gradient(to right, #f03840, #a5272d);
 }
 
 @media screen and (max-height: 450px) {
