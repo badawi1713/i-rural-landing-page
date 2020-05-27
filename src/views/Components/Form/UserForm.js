@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserForm = () => {
+const UserForm = ({ provinceList }) => {
   return (
     <div className="form-body">
       <div className="form-body-group">
@@ -51,7 +51,7 @@ const UserForm = () => {
                   <p>Email</p>
                 </label>
                 <div className="form-input">
-                  <input type="text" />
+                  <input type="email" />
                 </div>
               </div>
             </div>
@@ -72,7 +72,17 @@ const UserForm = () => {
                 </label>
                 <div className="form-input">
                   <select>
-                    <option>Pilih Provinsi</option>
+                    <option value="">Pilih Provinsi</option>
+                    {provinceList.length < 1 ? (
+                      <option value="0">Data Provinsi Kosong</option>
+                    ) : (
+                      provinceList &&
+                      provinceList.map((item) => (
+                        <option key={item.id} value={item.name}>
+                          {item.name}
+                        </option>
+                      ))
+                    )}
                   </select>
                 </div>
               </div>

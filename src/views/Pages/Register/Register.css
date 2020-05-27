@@ -81,8 +81,8 @@ select:focus {
 
 .form-input-label .label-gps-icon,
 .label-router-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -102,7 +102,8 @@ select:focus {
   color: #78788c;
 }
 
-.form-input input,
+.form-input input[type=email],
+input[type=text],
 select,
 textarea {
   border: 1px solid #78788c;
@@ -152,7 +153,8 @@ textarea {
   color: #f03f46;
 }
 
-.share-location-container {
+.share-location-container,
+.upload-file-container {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -160,7 +162,8 @@ textarea {
   width: 100%;
 }
 
-.share-location-container button {
+.share-location-container button,
+.upload-file-input {
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -172,6 +175,7 @@ textarea {
   width: auto;
   align-self: flex-start;
   cursor: pointer;
+  border: none;
 }
 
 .location-info {
@@ -318,7 +322,8 @@ textarea {
     color: #78788c;
   }
 
-  .form-input input,
+  .form-input input[type=email],
+  input[type=text],
   select,
   textarea {
     border: 1px solid #78788c;
@@ -349,11 +354,27 @@ textarea {
     height: 150px;
   }
 
-  .share-location-container {
+  .share-location-container,
+  .upload-file-container {
     display: flex;
     flex-direction: row;
     margin-bottom: 0px;
     align-items: center;
+  }
+
+  .form-input .share-location-container button,
+  .upload-file-input {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    padding: 15px 25px;
+    background-color: #456dfc;
+    background-image: linear-gradient(322.36deg, #456dfc -1.85%, #62b2ff 100%);
+    border-radius: 5px;
+    width: 25%;
+    align-self: flex-end;
+    cursor: pointer;
   }
 
   .share-location-info {
@@ -373,19 +394,6 @@ textarea {
     height: auto;
   }
 
-  .form-input .share-location-container button {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    color: #ffffff;
-    padding: 15px 25px;
-    background-color: #456dfc;
-    background-image: linear-gradient(322.36deg, #456dfc -1.85%, #62b2ff 100%);
-    border-radius: 5px;
-    width: 25%;
-    align-self: flex-end;
-    cursor: pointer;
-  }
 
   .location-info {
     margin-bottom: 20px;

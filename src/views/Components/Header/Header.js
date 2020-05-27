@@ -1,4 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import "./Header.css";
 
 const Header = () => {
   return (
@@ -16,8 +19,12 @@ const Header = () => {
             di area rural tersebut
           </p>
           <div className="hero-button">
-            <button>Daftar sebagai Pengguna</button>
-            <button>Daftar sebagai ISP</button>
+            <Link to={"/register"}>
+              <button>Daftar sebagai Pengguna</button>
+            </Link>
+            <Link to={"/register"}>
+              <button>Daftar sebagai ISP</button>
+            </Link>
           </div>
         </div>
       </section>

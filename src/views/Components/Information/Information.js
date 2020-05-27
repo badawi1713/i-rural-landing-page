@@ -1,4 +1,6 @@
 import React from "react";
+
+import "./Information.css";
 import ConfigImage from "../../../assets/images/i-rural-config.jpg";
 
 const Information = () => {

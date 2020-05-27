@@ -1,4 +1,6 @@
 import React from "react";
+
+import "./Contact.css";
 import WhatsappIcon from "../../../assets/svg/whatsapp-logo.svg";
 
 const Contact = () => {

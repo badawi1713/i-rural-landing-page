@@ -1,6 +1,6 @@
 import React from "react";
 
-const ISPForm = () => {
+const ISPForm = ({ provinceList }) => {
   return (
     <div className="form-body">
       <div className="form-body-group">
@@ -29,7 +29,7 @@ const ISPForm = () => {
                   <p>Email ISP</p>
                 </label>
                 <div className="form-input">
-                  <input type="text" />
+                  <input type="email" />
                 </div>
               </div>
               <div className="form-input-content">
@@ -72,7 +72,17 @@ const ISPForm = () => {
                 </label>
                 <div className="form-input">
                   <select>
-                    <option>Pilih Provinsi</option>
+                    <option value="">Pilih Provinsi</option>
+                    {provinceList.length < 1 ? (
+                      <option value="0">Data Provinsi Kosong</option>
+                    ) : (
+                      provinceList &&
+                      provinceList.map((item) => (
+                        <option key={item.id} value={item.name}>
+                          {item.name}
+                        </option>
+                      ))
+                    )}
                   </select>
                 </div>
               </div>
@@ -162,8 +172,22 @@ const ISPForm = () => {
               </label>
 
               <div className="form-input">
-                <div className="share-location-container">
-                  <button>Upload Berkas</button>
+                <div className="upload-file-container">
+                  <input
+                    type="file"
+                    className="upload-file-input"
+                    id="selectedFile"
+                    accept="application/pdf"
+                    style={{ display: "none" }}
+                  />
+                  <input
+                    className="upload-file-input"
+                    type="button"
+                    value="Upload Berkas"
+                    onClick={() =>
+                      document.getElementById("selectedFile").click()
+                    }
+                  />
                 </div>
               </div>
             </div>

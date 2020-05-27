@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Footer.css";
+
 import Logo from "../../../assets/images/irural-logo.jpeg";
 import FacebookIcon from "../../../assets/svg/facebook-logo.svg";
 import TwitterIcon from "../../../assets/svg/twitter-logo.svg";
