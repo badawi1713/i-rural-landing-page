@@ -1,0 +1,116 @@
+header {
+    padding-top: 65px;
+}
+
+.hero-section {
+    background-color: lightgrey;
+    background-image: linear-gradient(90deg,
+            rgba(0, 0, 0, 0.2) 3.75%,
+            rgba(0, 0, 0, 0) 100%),
+        url("../../../assets/images/small-hero-background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    height: auto;
+    max-width: 100%;
+}
+
+.hero-container {
+    display: grid;
+    gap: 26px;
+    padding: 50px 25px;
+}
+
+.hero-container .hero-title p {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+    color: #ffffff;
+    line-height: 34px;
+}
+
+.hero-container p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 25px;
+    color: #ffffff;
+    text-transform: capitalize;
+}
+
+.hero-button {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.hero-button button {
+    background-color: #f03840;
+    background: linear-gradient(119.16deg, #ed5f64 0%, #f03840 100%);
+    border-radius: 5px;
+    padding: 15px 60px;
+    width: 100%;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    cursor: pointer;
+}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {
+    header {
+        padding-top: 60px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .hero-section {
+        padding: 125px 100px;
+        background-image: linear-gradient(90deg,
+                rgba(0, 0, 0, 0.6) 3.75%,
+                rgba(0, 0, 0, 0.357022) 65.43%,
+                rgba(0, 0, 0, 0) 100%),
+            url("../../../assets/images/hero-background.png");
+        height: 700px;
+        width: 100%;
+    }
+
+    .hero-container {
+        gap: 30px;
+        height: 100%;
+    }
+
+    .hero-container .hero-title p {
+        width: 55%;
+        font-weight: bolder;
+        font-size: 45px;
+        line-height: 61px;
+    }
+
+    .hero-container p {
+        width: 61%;
+        font-size: 20px;
+        line-height: 36px;
+
+        text-transform: capitalize;
+    }
+
+    .hero-button {
+        display: block;
+    }
+
+    .hero-button button {
+        padding: 15px 25px;
+        margin-right: 25px;
+        width: auto;
+        color: #ffffff;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+}
