@@ -50,6 +50,11 @@ const ISPForm = ({ provinceList }) => {
     }
   };
 
+  const redirectMaps = () => {
+    window.open(`https://maps.google.com/maps?z=7&q=${latitude},${longitude}`);
+    return null;
+  };
+
   return (
     <div className="form-body">
       <div className="form-body-group">
@@ -174,7 +179,10 @@ const ISPForm = ({ provinceList }) => {
               </label>
               {userAdress ? (
                 <div className="location-info">
-                  <p className="location-text-url">
+                  <p
+                    onClick={() => redirectMaps()}
+                    className="location-text-url"
+                  >
                     https://maps.google.com/maps?z=7&q={latitude},{longitude}
                   </p>
                 </div>
