@@ -108,7 +108,7 @@ select,
 textarea {
   border: 1px solid #78788c;
   border-radius: 5px;
-  padding: 14px 25px;
+  padding: 15px;
   width: 100%;
   font-style: normal;
   font-weight: normal;
@@ -143,6 +143,7 @@ textarea {
 }
 
 .share-location-info textarea {
+  padding: 15px;
   width: 100%;
   height: auto;
   margin-bottom: 15px;
