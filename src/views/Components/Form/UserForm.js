@@ -5,33 +5,30 @@ const UserForm = ({ provinceList }) => {
   const [longitude, setLongitude] = useState(null);
   const [userAdress, setUserAddress] = useState(null);
 
-  const getLocation = async () => {
+  const getLocation = () => {
     if (navigator.geolocation) {
-      await navigator.geolocation.getCurrentPosition(
-        getCoordinates,
-        handleLocationError
-      );
+      navigator.geolocation.getCurrentPosition(async function (position) {
+        console.log(position);
+        await setLatitude(position.coords.latitude);
+        await setLongitude(position.coords.longitude);
+        await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}&zoom=18&addressdetails=1`,
+          { mode: "cors" }
+        )
+          .then((response) => {
+            console.log(response);
+            let res = response.json();
+            return res;
+          })
+          .then((data) => {
+            console.log(data);
+            setUserAddress(data.display_name);
+          })
+          .catch((error) => alert(error));
+      }, handleLocationError);
     } else {
       alert("Geolocation is not supported by this browser");
     }
-  };
-
-  const getCoordinates = async (position) => {
-    await setLatitude(position.coords.latitude);
-    await setLongitude(position.coords.longitude);
-    await reverseGeocodeCoordinates();
-  };
-
-  const reverseGeocodeCoordinates = async () => {
-    await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.display_name);
-        setUserAddress(data.display_name);
-      })
-      .catch((error) => alert(error));
   };
 
   const handleLocationError = (error) => {
@@ -181,7 +178,7 @@ const UserForm = ({ provinceList }) => {
                 <p>Share Location</p>
               </label>
 
-              {latitude && longitude ? (
+              {userAdress ? (
                 <div className="location-info">
                   <p
                     onClick={() => redirectMaps()}
@@ -196,7 +193,7 @@ const UserForm = ({ provinceList }) => {
 
               <div className="form-input">
                 <div className="share-location-container">
-                  {latitude && longitude ? (
+                  {userAdress ? (
                     <div className="share-location-info">
                       <textarea>{userAdress}</textarea>
                       {/* <div className="message">
