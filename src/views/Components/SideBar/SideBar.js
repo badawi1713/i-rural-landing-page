@@ -80,7 +80,7 @@ const SideBar = () => {
 
       <div className="sidenav-button">
         <Link to={"/register"}>
-          <button>Daftar I-RURAL</button>
+          <button onClick={() => closeNav()}>Daftar I-RURAL</button>
         </Link>
       </div>
     </div>
