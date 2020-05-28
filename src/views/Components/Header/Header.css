@@ -19,7 +19,7 @@ header {
 .hero-container {
     display: grid;
     gap: 26px;
-    padding: 50px 25px;
+    padding: 50px 25px 40px 25px;
 }
 
 .hero-container .hero-title p {
@@ -43,7 +43,7 @@ header {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2, 1fr);
-    gap: 15px;
+    gap: 20px;
 }
 
 .hero-button button {

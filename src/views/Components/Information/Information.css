@@ -1,8 +1,8 @@
 .information-container {
-    padding: 40px 20px;
+    padding: 50px 25px 70px 25px;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 70px;
 }
 
 .information-content {
@@ -107,10 +107,10 @@
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {
     .information-container {
-        padding: 80px 100px;
+        padding: 90px 100px 120px 100px;
         display: grid;
         grid-template-rows: repeat(2, 1fr);
-        gap: 60px;
+        gap: 120px;
     }
 
     .information-content {

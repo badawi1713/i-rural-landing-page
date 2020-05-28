@@ -67,7 +67,7 @@ const Information = () => {
                   Indihome). Deposit ini bukan merupakan pembayaran tagihan
                   bulan pertama tetapi sebagai jaminan bila pelanggan
                   meninggalkan tunggakan dan deposit akan dikembalikan kepada
-                  pelanggn bila berhenti berlangganan.
+                  pelanggan bila berhenti berlangganan.
                 </p>
               </div>
             </div>
