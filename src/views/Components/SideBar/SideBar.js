@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./SideBar.css";
 
-const SideBar = () => {
+const SideBar = ({ contactScroll }) => {
   const closeNav = () => {
     document.getElementById("mySidenav").style.width = "0";
   };
@@ -65,7 +65,7 @@ const SideBar = () => {
             <Scroll
               style={{ cursor: "pointer" }}
               activeClass="active"
-              to="contact"
+              to={contactScroll}
               spy={true}
               smooth={true}
               offset={-50}
@@ -79,9 +79,18 @@ const SideBar = () => {
       </div>
 
       <div className="sidenav-button">
-        <Link to={"/register"}>
-          <button onClick={() => closeNav()}>Daftar I-RURAL</button>
-        </Link>
+        <Scroll
+          activeClass="active"
+          to="registration"
+          spy={false}
+          smooth={true}
+          offset={0}
+          duration={30}
+        >
+          <Link to={{ pathname: "/register", userFormActive: true }}>
+            <button onClick={() => closeNav()}>Daftar I-RURAL</button>
+          </Link>
+        </Scroll>
       </div>
     </div>
   );

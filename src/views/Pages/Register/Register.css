@@ -147,6 +147,10 @@ textarea {
   width: 100%;
   height: 130px;
   margin-bottom: 15px;
+  animation: fadein 2s;
+  -moz-animation: fadein 2s;
+  -webkit-animation: fadein 2s;
+  -o-animation: fadein 2s;
 }
 
 .share-location-info .message p {
@@ -167,6 +171,7 @@ textarea {
 
 .share-location-container button,
 .upload-file-input {
+
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -182,6 +187,10 @@ textarea {
 }
 
 .location-info {
+  animation: fadein 2s;
+  -moz-animation: fadein 2s;
+  -webkit-animation: fadein 2s;
+  -o-animation: fadein 2s;
   margin-bottom: 15px;
   display: inline-block;
   width: 100%;

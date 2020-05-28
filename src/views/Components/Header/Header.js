@@ -19,10 +19,10 @@ const Header = () => {
             di area rural tersebut
           </p>
           <div className="hero-button">
-            <Link to={"/register"}>
+            <Link to={{ pathname: "/register", userFormActive: true }}>
               <button>Daftar sebagai Pengguna</button>
             </Link>
-            <Link to={"/register"}>
+            <Link to={{ pathname: "/register", userFormActive: false }}>
               <button>Daftar sebagai ISP</button>
             </Link>
           </div>

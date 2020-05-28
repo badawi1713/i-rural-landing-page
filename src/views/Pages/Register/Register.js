@@ -9,7 +9,7 @@ import SideBar from "../../Components/SideBar/SideBar";
 import Contact from "../../Components/Contact/Contact";
 import Footer from "../../Components/Footer/Footer";
 
-const RegisterPage = () => {
+const RegisterPage = (props) => {
   const [showUserForm, setShowUserForm] = useState(true);
 
   const provinceData = [
@@ -168,10 +168,10 @@ const RegisterPage = () => {
   };
   return (
     <div>
-      <SideBar />
-      <NavBar openNav={() => openNav()} />
+      <SideBar contactScroll="home" />
+      <NavBar contactScroll="home" openNav={() => openNav()} />
       <div onClick={() => closeNav()}>
-        <section className="form-section">
+        <section id="registration" className="form-section">
           <div className="form-section-container">
             <div className="form-header">
               <div className="form-title">

@@ -19,9 +19,9 @@ const HomePage = () => {
 
   return (
     <div>
-      <SideBar />
+      <SideBar contactScroll="contact" />
       <div className="container">
-        <NavBar openNav={() => openNav()} />
+        <NavBar contactScroll="contact" openNav={() => openNav()} />
         <div onClick={() => closeNav()}>
           <Header />
           <main>
