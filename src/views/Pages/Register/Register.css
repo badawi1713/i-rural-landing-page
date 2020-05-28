@@ -137,12 +137,14 @@ textarea {
 
 .share-location-info {
   margin-bottom: 15px;
-  display: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .share-location-info textarea {
-  height: auto;
   width: 100%;
+  height: auto;
   margin-bottom: 15px;
 }
 
@@ -180,15 +182,20 @@ textarea {
 
 .location-info {
   margin-bottom: 15px;
-  display: none;
+  display: inline-block;
   width: 100%;
   word-break: break-word;
 }
 
-.location-info a {
+.location-text-url {
   font-size: 16px;
   text-decoration-line: underline;
   color: #1d499d;
+  cursor: pointer;
+}
+
+.form-input-info {
+  display: inline-block;
 }
 
 .form-input-info p {
@@ -378,14 +385,14 @@ textarea {
   }
 
   .share-location-info {
-    display: none;
+    display: flex;
     width: 75%;
     height: auto;
     margin-right: 25px;
     margin-bottom: 0px;
   }
 
-  .share-location-info .message p {
+  .share-location-info .message {
     display: none;
   }
 
@@ -397,14 +404,18 @@ textarea {
 
   .location-info {
     margin-bottom: 20px;
-    display: none;
+    display: inline-block;
   }
 
-  .location-info a {
+  .location-text-url {
     font-size: 20px;
     text-decoration-line: underline;
     color: #1d499d;
     width: 100%;
+  }
+
+  .form-input-info {
+    display: inline-block;
   }
 
   .form-input-info p {

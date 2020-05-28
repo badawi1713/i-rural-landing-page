@@ -1,6 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 
 const UserForm = ({ provinceList }) => {
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [userAdress, setUserAddress] = useState(null);
+
+  const getLocation = async () => {
+    if (navigator.geolocation) {
+      await navigator.geolocation.getCurrentPosition(
+        getCoordinates,
+        handleLocationError
+      );
+    } else {
+      alert("Geolocation is not supported by this browser");
+    }
+  };
+
+  const getCoordinates = async (position) => {
+    await setLatitude(position.coords.latitude);
+    await setLongitude(position.coords.longitude);
+    await reverseGeocodeCoordinates();
+  };
+
+  const reverseGeocodeCoordinates = async () => {
+    await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.display_name);
+        setUserAddress(data.display_name);
+      })
+      .catch((error) => alert(error));
+  };
+
+  const handleLocationError = (error) => {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        alert("The request to get user location timed out.");
+        break;
+      case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.");
+        break;
+      default:
+        alert("An unknown error occurred.");
+    }
+  };
+
+  const redirectMaps = () => {
+    window.open(`https://maps.google.com/maps?z=7&q=${latitude},${longitude}`);
+    return null;
+  };
+
   return (
     <div className="form-body">
       <div className="form-body-group">
@@ -123,27 +180,36 @@ const UserForm = ({ provinceList }) => {
                 </span>
                 <p>Share Location</p>
               </label>
-              <div className="location-info">
-                <a
-                  href=" 
-        https://maps.google.com/maps?z=7&q=-6.2038519755732,106.76461335272"
-                >
-                  https://maps.google.com/maps?z=7&q=-6.2038519755732,106.76461335272
-                </a>
-              </div>
+
+              {latitude && longitude ? (
+                <div className="location-info">
+                  <p
+                    onClick={() => redirectMaps()}
+                    className="location-text-url"
+                  >
+                    https://maps.google.com/maps?z=7&q={latitude},{longitude}
+                  </p>
+                </div>
+              ) : (
+                <> </>
+              )}
+
               <div className="form-input">
                 <div className="share-location-container">
-                  <div className="share-location-info">
-                    <textarea></textarea>
-                    <div className="message">
-                      <p>
-                        *Share location kamu supaya tim I-RURAL bisa mengetahui
-                        titik koordinat lokasi kamu secara detail
-                      </p>
+                  {latitude && longitude ? (
+                    <div className="share-location-info">
+                      <textarea>{userAdress}</textarea>
+                      {/* <div className="message">
+                        <p>
+                          *Share location kamu supaya tim I-RURAL bisa
+                          mengetahui titik koordinat lokasi kamu secara detail
+                        </p>
+                      </div> */}
                     </div>
-                  </div>
-
-                  <button>Share Location</button>
+                  ) : (
+                    <></>
+                  )}
+                  <button onClick={() => getLocation()}>Share Location</button>
                 </div>
               </div>
               <div className="form-input-info">
