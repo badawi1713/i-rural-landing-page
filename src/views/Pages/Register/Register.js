@@ -11,7 +11,7 @@ import Footer from "../../Components/Footer/Footer";
 
 const RegisterPage = (props) => {
   const [showUserForm, setShowUserForm] = useState(
-    props.location.userFormActive && true
+    props.location.userFormActive || false
   );
 
   const provinceData = [
