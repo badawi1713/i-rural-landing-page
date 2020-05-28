@@ -77,7 +77,7 @@ const Navbar = ({ openNav, contactScroll }) => {
               to="registration"
               spy={true}
               smooth={true}
-              offset={-70}
+              offset={0}
               duration={30}
             >
               <Link to={{ pathname: "/register", userFormActive: true }}>

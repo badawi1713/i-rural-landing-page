@@ -10,7 +10,9 @@ import Contact from "../../Components/Contact/Contact";
 import Footer from "../../Components/Footer/Footer";
 
 const RegisterPage = (props) => {
-  const [showUserForm, setShowUserForm] = useState(true);
+  const [showUserForm, setShowUserForm] = useState(
+    props.location.userFormActive && true
+  );
 
   const provinceData = [
     {
