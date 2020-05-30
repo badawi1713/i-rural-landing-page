@@ -175,7 +175,7 @@ const ISPForm = ({ provinceList }) => {
                 <span>
                   <div className="label-gps-icon"></div>
                 </span>
-                <p>Share Location</p>
+                <p>Bagikan Lokasi</p>
               </label>
               {userAdress ? (
                 <div className="location-info">
@@ -197,7 +197,7 @@ const ISPForm = ({ provinceList }) => {
                       <textarea defaultValue={userAdress}></textarea>
                       {/* <div className="message">
                         <p>
-                          *Share location kamu supaya tim I-RURAL bisa
+                          *Bagikan lokasi kamu supaya tim I-RURAL bisa
                           mengetahui titik koordinat lokasi kamu secara detail
                         </p>
                       </div> */}
@@ -205,12 +205,12 @@ const ISPForm = ({ provinceList }) => {
                   ) : (
                     <></>
                   )}
-                  <button onClick={() => getLocation()}>Share Location</button>
+                  <button onClick={() => getLocation()}>Bagikan Lokasi</button>
                 </div>
               </div>
               <div className="form-input-info">
                 <p>
-                  *Share location kamu supaya tim I-RURAL bisa mengetahui titik
+                  *Bagikan lokasi kamu supaya tim I-RURAL bisa mengetahui titik
                   koordinat lokasi kamu secara detail
                 </p>
               </div>

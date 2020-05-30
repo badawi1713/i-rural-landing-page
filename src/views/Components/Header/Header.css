@@ -3,7 +3,7 @@ header {
     -moz-animation: fadein 2s;
     -webkit-animation: fadein 2s;
     -o-animation: fadein 2s;
-    padding-top: 65px;
+    padding-top: 57px;
 }
 
 .hero-section {
@@ -15,7 +15,7 @@ header {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: auto;
+    height: 100%;
     max-width: 100%;
 }
 

@@ -1,9 +1,34 @@
 import React, { useState } from "react";
 
-const UserForm = ({ provinceList }) => {
+import { useDispatch, connect } from "react-redux";
+import { userRegistration } from "../../../Redux/actions/registration";
+
+const UserForm = ({ provinceList, onSubmitState }) => {
+  const dispatch = useDispatch();
+
+  const [fullname, setFullname] = useState("");
+  const [ktp, setKtp] = useState("");
+  const [phone_number, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [province, setProvince] = useState("");
+  const [subdistrict, setSubdistrict] = useState("");
+  const [zip_code, setZipCode] = useState("");
+  const [address, setAddress] = useState("");
+
+  const [fullnameInputError, setFullnameInputError] = useState(false);
+  const [ktpInputError, setKtpInputError] = useState(false);
+  const [phoneNumberInputError, setPhoneNumberInputError] = useState(false);
+  const [emailInputError, setEmailInputError] = useState(false);
+  const [provinceInputError, setProvinceInputError] = useState(false);
+  const [subdistrictInputError, setSubdistrictInputError] = useState(false);
+  const [zipCodeInputError, setZipCodeInputError] = useState(false);
+  const [addressInputError, setAddressInputError] = useState(false);
+
+  const [validate, setValidate] = useState(false);
+
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [userAdress, setUserAddress] = useState(null);
+  const [location_address, setLocationAddress] = useState(null);
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -22,7 +47,7 @@ const UserForm = ({ provinceList }) => {
           })
           .then((data) => {
             console.log(data);
-            setUserAddress(data.display_name);
+            setLocationAddress(data.display_name);
           })
           .catch((error) => alert(error));
       }, handleLocationError);
@@ -55,6 +80,29 @@ const UserForm = ({ provinceList }) => {
     return null;
   };
 
+  const userRegistrationSubmit = (e) => {
+    const data = {
+      fullname,
+      ktp,
+      phone_number,
+      email,
+      province,
+      subdistrict,
+      zip_code,
+      address,
+      latitude,
+      longitude,
+      location_address,
+    };
+
+    dispatch(userRegistration(data))
+      .then(onSubmitState)
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
+  };
+
   return (
     <div className="form-body">
       <div className="form-body-group">
@@ -72,7 +120,14 @@ const UserForm = ({ provinceList }) => {
                   <p>Nama Lengkap</p>
                 </label>
                 <div className="form-input">
-                  <input type="text" />
+                  <input
+                    required
+                    name="fullname"
+                    onChange={(e) => {
+                      setFullname(e.target.value);
+                    }}
+                    type="text"
+                  />
                 </div>
               </div>
               <div className="form-input-content">
@@ -83,7 +138,14 @@ const UserForm = ({ provinceList }) => {
                   <p>No KTP</p>
                 </label>
                 <div className="form-input">
-                  <input type="text" />
+                  <input
+                    required
+                    name="ktp"
+                    onChange={(e) => {
+                      setKtp(e.target.value);
+                    }}
+                    type="text"
+                  />
                 </div>
               </div>
               <div className="form-input-content">
@@ -94,7 +156,14 @@ const UserForm = ({ provinceList }) => {
                   <p>No Telepon</p>
                 </label>
                 <div className="form-input">
-                  <input type="text" />
+                  <input
+                    required
+                    name="phone_number"
+                    onChange={(e) => {
+                      setPhoneNumber(e.target.value);
+                    }}
+                    type="text"
+                  />
                 </div>
               </div>
               <div className="form-input-content">
@@ -105,7 +174,14 @@ const UserForm = ({ provinceList }) => {
                   <p>Email</p>
                 </label>
                 <div className="form-input">
-                  <input type="email" />
+                  <input
+                    required
+                    name="email"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    type="email"
+                  />
                 </div>
               </div>
             </div>
@@ -125,7 +201,12 @@ const UserForm = ({ provinceList }) => {
                   <p>Provinsi</p>
                 </label>
                 <div className="form-input">
-                  <select>
+                  <select
+                    name="province"
+                    onChange={(e) => {
+                      setProvince(e.target.value);
+                    }}
+                  >
                     <option value="">Pilih Provinsi</option>
                     {provinceList.length < 1 ? (
                       <option value="0">Data Provinsi Kosong</option>
@@ -145,7 +226,14 @@ const UserForm = ({ provinceList }) => {
                   <p>Kelurahan</p>
                 </label>
                 <div className="form-input">
-                  <input type="text" />
+                  <input
+                    required
+                    name="subdistrict"
+                    onChange={(e) => {
+                      setSubdistrict(e.target.value);
+                    }}
+                    type="text"
+                  />
                 </div>
               </div>
               <div className="form-input-content">
@@ -153,7 +241,14 @@ const UserForm = ({ provinceList }) => {
                   <p>Kode POS</p>
                 </label>
                 <div className="form-input">
-                  <input type="text" />
+                  <input
+                    required
+                    name="zip_code"
+                    onChange={(e) => {
+                      setZipCode(e.target.value);
+                    }}
+                    type="text"
+                  />
                 </div>
               </div>
             </div>
@@ -167,7 +262,13 @@ const UserForm = ({ provinceList }) => {
                 <p>Alamat Lengkap</p>
               </label>
               <div className="form-input">
-                <textarea></textarea>
+                <textarea
+                  required
+                  name="address"
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                  }}
+                ></textarea>
               </div>
             </div>
             <div className="form-input-content ">
@@ -175,10 +276,10 @@ const UserForm = ({ provinceList }) => {
                 <span>
                   <div className="label-gps-icon"></div>
                 </span>
-                <p>Share Location</p>
+                <p>Bagikan Lokasi</p>
               </label>
 
-              {userAdress ? (
+              {location_address ? (
                 <div className="location-info">
                   <p
                     onClick={() => redirectMaps()}
@@ -193,12 +294,21 @@ const UserForm = ({ provinceList }) => {
 
               <div className="form-input">
                 <div className="share-location-container">
-                  {userAdress ? (
+                  {location_address ? (
                     <div className="share-location-info">
-                      <textarea>{userAdress}</textarea>
+                      <textarea
+                        required
+                        name="location_address"
+                        onChange={(e) => {
+                          setLocationAddress(e.target.value);
+                        }}
+                        value={location_address}
+                      >
+                        {location_address}
+                      </textarea>
                       {/* <div className="message">
                         <p>
-                          *Share location kamu supaya tim I-RURAL bisa
+                          *Bagikan lokasi kamu supaya tim I-RURAL bisa
                           mengetahui titik koordinat lokasi kamu secara detail
                         </p>
                       </div> */}
@@ -206,12 +316,12 @@ const UserForm = ({ provinceList }) => {
                   ) : (
                     <></>
                   )}
-                  <button onClick={() => getLocation()}>Share Location</button>
+                  <button onClick={() => getLocation()}>Bagikan Lokasi</button>
                 </div>
               </div>
               <div className="form-input-info">
                 <p>
-                  *Share location kamu supaya tim I-RURAL bisa mengetahui titik
+                  *Bagikan lokasi kamu supaya tim I-RURAL bisa mengetahui titik
                   koordinat lokasi kamu secara detail
                 </p>
               </div>
@@ -221,10 +331,18 @@ const UserForm = ({ provinceList }) => {
       </div>
 
       <div className="submit-button">
-        <button>Daftar Sebagai Pengguna</button>
+        <button type="submit" onClick={() => userRegistrationSubmit()}>
+          Daftar Sebagai Pengguna
+        </button>
       </div>
     </div>
   );
 };
 
-export default UserForm;
+const mapStateToProps = (registrations) => {
+  return {
+    registrations,
+  };
+};
+
+export default connect(mapStateToProps)(UserForm);

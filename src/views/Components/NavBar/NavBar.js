@@ -11,9 +11,8 @@ const Navbar = ({ openNav, contactScroll }) => {
     <nav>
       <section className="navbar-section">
         <div className="navbar-container">
-          <div className="navbar-logo">
-            <img src={Logo} alt="navbar-logo.png" />
-          </div>
+          <img className="navbar-logo" src={Logo} alt="navbar-logo.png" />
+
           <div className="sidebar-button">
             <span onClick={openNav} id="navButton">
               <i className="fas fa-bars"></i>

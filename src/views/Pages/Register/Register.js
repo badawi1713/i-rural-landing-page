@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-
+import { withRouter } from "react-router-dom";
 import "./Register.css";
 
 import ISPForm from "../../Components/Form/ISPForm";
 import UserForm from "../../Components/Form/UserForm";
+import Message from "../../Components/Message/Message";
 import NavBar from "../../Components/NavBar/NavBar";
 import SideBar from "../../Components/SideBar/SideBar";
 import Contact from "../../Components/Contact/Contact";
@@ -11,8 +12,10 @@ import Footer from "../../Components/Footer/Footer";
 
 const RegisterPage = (props) => {
   const [showUserForm, setShowUserForm] = useState(
-    props.location.userFormActive || false
+    props.location.userFormActive || true
   );
+
+  const [onSubmit, setOnSubmit] = useState(false);
 
   const provinceData = [
     {
@@ -168,50 +171,62 @@ const RegisterPage = (props) => {
   const closeNav = () => {
     document.getElementById("mySidenav").style.width = "0";
   };
+
+  const onSubmitForm = () => {
+    setOnSubmit(true);
+  };
+
   return (
     <div>
       <SideBar contactScroll="home" />
       <NavBar contactScroll="home" openNav={() => openNav()} />
       <div onClick={() => closeNav()}>
-        <section id="registration" className="form-section">
-          <div className="form-section-container">
-            <div className="form-header">
-              <div className="form-title">
-                <p>Daftar I-RURAL</p>
+        {!onSubmit ? (
+          <section id="registration" className="form-section">
+            <div className="form-section-container">
+              <div className="form-header">
+                <div className="form-title">
+                  <p>Daftar I-RURAL</p>
+                </div>
+                {showUserForm ? (
+                  <div className="form-header-button">
+                    <button onClick={() => registerAsUser()}>
+                      Daftar Sebagai Pengguna
+                    </button>
+                    <button
+                      style={{ opacity: 0.3 }}
+                      onClick={() => registerAsISP()}
+                    >
+                      Daftar Sebagai ISP
+                    </button>
+                  </div>
+                ) : (
+                  <div className="form-header-button">
+                    <button
+                      style={{ opacity: 0.3 }}
+                      onClick={() => registerAsUser()}
+                    >
+                      Daftar Sebagai Pengguna
+                    </button>
+                    <button onClick={() => registerAsISP()}>
+                      Daftar Sebagai ISP
+                    </button>
+                  </div>
+                )}
               </div>
               {showUserForm ? (
-                <div className="form-header-button">
-                  <button onClick={() => registerAsUser()}>
-                    Daftar Sebagai Pengguna
-                  </button>
-                  <button
-                    style={{ opacity: 0.3 }}
-                    onClick={() => registerAsISP()}
-                  >
-                    Daftar Sebagai ISP
-                  </button>
-                </div>
+                <UserForm
+                  onSubmitState={() => onSubmitForm()}
+                  provinceList={provinceData}
+                />
               ) : (
-                <div className="form-header-button">
-                  <button
-                    style={{ opacity: 0.3 }}
-                    onClick={() => registerAsUser()}
-                  >
-                    Daftar Sebagai Pengguna
-                  </button>
-                  <button onClick={() => registerAsISP()}>
-                    Daftar Sebagai ISP
-                  </button>
-                </div>
+                <ISPForm provinceList={provinceData} />
               )}
             </div>
-            {showUserForm ? (
-              <UserForm provinceList={provinceData} />
-            ) : (
-              <ISPForm provinceList={provinceData} />
-            )}
-          </div>
-        </section>
+          </section>
+        ) : (
+          <Message />
+        )}
         <Contact />
         <Footer />
       </div>
@@ -219,4 +234,4 @@ const RegisterPage = (props) => {
   );
 };
 
-export default RegisterPage;
+export default withRouter(RegisterPage);
