@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import React, { useState, useRef } from "react";
 
 import { useForm } from "react-hook-form";
@@ -5,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import {
   ispRegistration,
-  uploadIspFile,
+  // uploadIspFile,
 } from "../../../Redux/actions/registration";
 
 const ISPForm = ({ provinceList, onSubmitState }) => {
@@ -135,7 +136,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                   />
                   {errors.nama_isp && (
                     <p className="error-input-message">
-                      Nama ISP tidak boleh kosong
+                      *Nama ISP tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -166,11 +167,11 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                   />
                   {errors.email && errors.email.type === "required" && (
                     <p className="error-input-message">
-                      Email tidak boleh kosong
+                      *Email tidak boleh kosong
                     </p>
                   )}
                   {errors.email && errors.email.type === "pattern" && (
-                    <p className="error-input-message">Format email salah</p>
+                    <p className="error-input-message">*Format email salah</p>
                   )}
                 </div>
               </div>
@@ -197,7 +198,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                   />
                   {errors.nama && (
                     <p className="error-input-message">
-                      Contact person tidak boleh kosong
+                      *Contact person tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -218,22 +219,16 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                   <input
                     ref={register({
                       required: true,
-                      pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
                     })}
                     name="phone"
                     onChange={(e) => {
                       setPhone(e.target.value);
                     }}
-                    type="text"
+                    type="number"
                   />
-                  {errors.phone && errors.phone.type === "required" && (
+                  {errors.phone && (
                     <p className="error-input-message">
-                      Nomor telepon tidak boleh kosong
-                    </p>
-                  )}
-                  {errors.phone && errors.phone.type === "pattern" && (
-                    <p className="error-input-message">
-                      Format nomor telepon salah
+                      *Nomor telepon tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -281,7 +276,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                   </select>
                   {errors.provinsi && (
                     <p className="error-input-message">
-                      Provinsi tidak boleh kosong
+                      *Provinsi tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -306,7 +301,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                   />
                   {errors.kelurahan && (
                     <p className="error-input-message">
-                      Kelurahan tidak boleh kosong
+                      *Kelurahan tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -331,7 +326,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                   />
                   {errors.kodepos && (
                     <p className="error-input-message">
-                      Kode pos tidak boleh kosong
+                      *Kode pos tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -361,7 +356,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                 ></textarea>
                 {errors.alamat && (
                   <p className="error-input-message">
-                    Alamat lengkap tidak boleh kosong
+                    *Alamat lengkap tidak boleh kosong
                   </p>
                 )}
               </div>
@@ -433,7 +428,12 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                 <span>
                   <i className="fas fa-file-alt"></i>
                 </span>
-                <p>Dokumen Surat Izin</p>
+                <p>
+                  Dokumen Surat Izin{" "}
+                  <span title="Harus diisi" className="input-info">
+                    *
+                  </span>
+                </p>
               </label>
 
               <div className="form-input">

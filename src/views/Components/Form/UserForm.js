@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
@@ -130,7 +131,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   />
                   {errors.nama && (
                     <p className="error-input-message">
-                      Nama tidak boleh kosong
+                      *Nama tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -158,7 +159,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   />
                   {errors.nik && (
                     <p className="error-input-message">
-                      No KTP tidak boleh kosong
+                      *No KTP tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -179,22 +180,16 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   <input
                     ref={register({
                       required: true,
-                      pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
                     })}
                     name="phone"
                     onChange={(e) => {
                       setPhone(e.target.value);
                     }}
-                    type="text"
+                    type="number"
                   />
-                  {errors.phone && errors.phone === "required" && (
+                  {errors.phone && (
                     <p className="error-input-message">
-                      Nomor telepon tidak boleh kosong
-                    </p>
-                  )}
-                  {errors.phone && errors.phone.type === "pattern" && (
-                    <p className="error-input-message">
-                      Format nomor telepon salah
+                      *Nomor telepon tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -225,7 +220,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   />
                   {errors.email && errors.email.type === "required" && (
                     <p className="error-input-message">
-                      Email tidak boleh kosong
+                      *Email tidak boleh kosong
                     </p>
                   )}
                   {errors.email && errors.email.type === "pattern" && (
@@ -276,7 +271,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   </select>
                   {errors.provinsi && (
                     <p className="error-input-message">
-                      Provinsi tidak boleh kosong
+                      *Provinsi tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -301,7 +296,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   />
                   {errors.kelurahan && (
                     <p className="error-input-message">
-                      Kelurahan tidak boleh kosong
+                      *Kelurahan tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -326,7 +321,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   />
                   {errors.kodepos && (
                     <p className="error-input-message">
-                      Kode pos tidak boleh kosong
+                      *Kode pos tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -356,7 +351,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 ></textarea>
                 {errors.alamat && (
                   <p className="error-input-message">
-                    Alamat lengkap tidak boleh kosong
+                    *Alamat lengkap tidak boleh kosong
                   </p>
                 )}
               </div>
