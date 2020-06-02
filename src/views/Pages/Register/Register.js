@@ -36,123 +36,123 @@ const RegisterPage = (props) => {
     },
     {
       id: 5,
-      name: "Gorontalo",
+      name: "D.I Yogyakarta",
     },
     {
       id: 6,
-      name: "Jakarta",
+      name: "Gorontalo",
     },
     {
       id: 7,
-      name: "Jambi",
+      name: "Jakarta",
     },
     {
       id: 8,
-      name: "Jawa Barat",
+      name: "Jambi",
     },
     {
       id: 9,
-      name: "Jawa Tengah",
+      name: "Jawa Barat",
     },
     {
       id: 10,
-      name: "Jawa Timur",
+      name: "Jawa Tengah",
     },
     {
       id: 11,
-      name: "Kalimantan Barat",
+      name: "Jawa Timur",
     },
     {
       id: 12,
-      name: "Kalimantan Selatan",
+      name: "Kalimantan Barat",
     },
     {
       id: 13,
-      name: "Kalimantan Tengah",
+      name: "Kalimantan Selatan",
     },
     {
       id: 14,
-      name: "Kalimantan Timur",
+      name: "Kalimantan Tengah",
     },
     {
       id: 15,
-      name: "Kalimantan Utara",
+      name: "Kalimantan Timur",
     },
     {
       id: 16,
-      name: "Kepulauan Bangka Belitung",
+      name: "Kalimantan Utara",
     },
     {
       id: 17,
-      name: "Kepulauan Riau",
+      name: "Kep. Bangka Belitung",
     },
     {
       id: 18,
-      name: "Lampung",
+      name: "Kepulauan Riau",
     },
     {
       id: 19,
-      name: "Maluku",
+      name: "Lampung",
     },
     {
       id: 20,
-      name: "Maluku Utara",
+      name: "Maluku",
     },
     {
       id: 21,
-      name: "Nusa Tenggara Barat",
+      name: "Maluku Utara",
     },
     {
       id: 22,
-      name: "Nusa Tenggara Timur",
+      name: "Nusa Tenggara Barat",
     },
     {
       id: 23,
-      name: "Papua",
+      name: "Nusa Tenggara Timur",
     },
     {
       id: 24,
-      name: "Papua Barat",
+      name: "Papua",
     },
     {
       id: 25,
-      name: "Riau",
+      name: "Papua Barat",
     },
     {
       id: 26,
-      name: "Sulawesi Barat",
+      name: "Riau",
     },
     {
       id: 27,
-      name: "Sulawesi Selatan",
+      name: "Sulawesi Barat",
     },
     {
       id: 28,
-      name: "Sulawesi Tengah",
+      name: "Sulawesi Selatan",
     },
     {
       id: 29,
-      name: "Sulawesi Tenggara",
+      name: "Sulawesi Tengah",
     },
     {
       id: 30,
-      name: " Sulawesi Utara",
+      name: "Sulawesi Tenggara",
     },
     {
       id: 31,
-      name: "Sumatra Barat",
+      name: " Sulawesi Utara",
     },
     {
       id: 32,
-      name: "Sumatra Selatan",
+      name: "Sumatra Barat",
     },
     {
       id: 33,
-      name: "Sumatra Utara",
+      name: "Sumatra Selatan",
     },
     {
       id: 34,
-      name: "Yogyakarta",
+      name: "Sumatra Utara",
     },
   ];
 
@@ -220,7 +220,10 @@ const RegisterPage = (props) => {
                   provinceList={provinceData}
                 />
               ) : (
-                <ISPForm provinceList={provinceData} />
+                <ISPForm
+                  onSubmitState={() => onSubmitForm()}
+                  provinceList={provinceData}
+                />
               )}
             </div>
           </section>

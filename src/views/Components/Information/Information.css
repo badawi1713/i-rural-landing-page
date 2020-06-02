@@ -42,7 +42,6 @@
     direction: ltr;
     font-weight: bold;
     font-size: 22px;
-    font-weight: 600;
     margin-bottom: 10px;
     color: #29293e;
     line-height: 30px;
@@ -140,7 +139,6 @@
     }
 
     .text-information h1 {
-        font-weight: 600;
         font-size: 30px;
         font-weight: bold;
         margin-bottom: 25px;

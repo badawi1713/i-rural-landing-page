@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useDispatch, connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userRegistration } from "../../../Redux/actions/registration";
 
 import { useForm } from "react-hook-form";
@@ -10,18 +10,18 @@ const UserForm = ({ provinceList, onSubmitState }) => {
 
   const dispatch = useDispatch();
 
-  const [fullname, setFullname] = useState("");
-  const [ktp, setKtp] = useState("");
-  const [phone_number, setPhoneNumber] = useState("");
+  const [nama, setNama] = useState("");
+  const [nik, setNik] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [province, setProvince] = useState("");
-  const [subdistrict, setSubdistrict] = useState("");
-  const [zip_code, setZipCode] = useState("");
-  const [address, setAddress] = useState("");
+  const [provinsi, setProvinsi] = useState("");
+  const [kelurahan, setKelurahan] = useState("");
+  const [kodepos, setKodepos] = useState("");
+  const [alamat, setAlamat] = useState("");
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [location_address, setLocationAddress] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -40,7 +40,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
           })
           .then((data) => {
             console.log(data);
-            setLocationAddress(data.display_name);
+            setCurrentLocation(data.display_name);
           })
           .catch((error) => alert(error));
       }, handleLocationError);
@@ -52,19 +52,23 @@ const UserForm = ({ provinceList, onSubmitState }) => {
   const handleLocationError = (error) => {
     switch (error.code) {
       case error.PERMISSION_DENIED:
-        alert("User denied the request for Geolocation.");
+        alert(
+          "Anda tidak mengizinkan untuk akses lokasi, silahkan untuk mengizinkan kembali."
+        );
         break;
       case error.POSITION_UNAVAILABLE:
-        alert("Location information is unavailable.");
+        alert("Informasi lokasi sedang tidak tersedia, silahkan coba kembali.");
         break;
       case error.TIMEOUT:
-        alert("The request to get user location timed out.");
+        alert(
+          "Waktu permintaan akses lokasi telah habis, silahkan coba kembali."
+        );
         break;
       case error.UNKNOWN_ERROR:
-        alert("An unknown error occurred.");
+        alert("Sedang terjadi kesalahan, silahkan coba kembali.");
         break;
       default:
-        alert("An unknown error occurred.");
+        alert("Sedang terjadi kesalahan, silahkan coba kembali.");
     }
   };
 
@@ -75,28 +79,22 @@ const UserForm = ({ provinceList, onSubmitState }) => {
 
   const userRegistrationSubmit = async (e) => {
     const data = {
-      fullname,
-      ktp,
-      phone_number,
+      nama,
+      nik,
+      phone,
       email,
-      province,
-      subdistrict,
-      zip_code,
-      address,
-      latitude,
-      longitude,
-      location_address,
+      provinsi,
+      kelurahan,
+      kodepos,
+      alamat,
+      currentLocation,
     };
 
     dispatch(userRegistration(data))
       .then(onSubmitState)
       .catch((error) => {
-        if (location_address === null) {
-          alert("Bagikan lokasi anda terlebih dahulu");
-        } else {
-          console.log(error);
-          alert("Sedang terjadi kesalahan pada server, silahkan coba lagi.");
-        }
+        console.log(error);
+        alert("Sedang terjadi kesalahan pada server, silahkan coba lagi.");
       });
   };
 
@@ -114,18 +112,23 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   <span>
                     <i className="fas fa-user"></i>
                   </span>
-                  <p>Nama Lengkap</p>
+                  <p>
+                    Nama Lengkap{" "}
+                    <span title="Harus diisi" className="input-info">
+                      *
+                    </span>
+                  </p>
                 </label>
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="fullname"
+                    name="nama"
                     onChange={(e) => {
-                      setFullname(e.target.value);
+                      setNama(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.fullname && (
+                  {errors.nama && (
                     <p className="error-input-message">
                       Nama tidak boleh kosong
                     </p>
@@ -137,18 +140,23 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   <span>
                     <i className="fas fa-id-card"></i>
                   </span>
-                  <p>No KTP</p>
+                  <p>
+                    No KTP{" "}
+                    <span title="Harus diisi" className="input-info">
+                      *
+                    </span>
+                  </p>
                 </label>
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="ktp"
+                    name="nik"
                     onChange={(e) => {
-                      setKtp(e.target.value);
+                      setNik(e.target.value);
                     }}
                     type="number"
                   />
-                  {errors.ktp && (
+                  {errors.nik && (
                     <p className="error-input-message">
                       No KTP tidak boleh kosong
                     </p>
@@ -160,7 +168,12 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   <span>
                     <i className="fas fa-phone-alt"></i>
                   </span>
-                  <p>No Telepon</p>
+                  <p>
+                    No Telepon{" "}
+                    <span title="Harus diisi" className="input-info">
+                      *
+                    </span>
+                  </p>
                 </label>
                 <div className="form-input">
                   <input
@@ -168,24 +181,22 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                       required: true,
                       pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
                     })}
-                    name="phone_number"
+                    name="phone"
                     onChange={(e) => {
-                      setPhoneNumber(e.target.value);
+                      setPhone(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.phone_number &&
-                    errors.phone_number.type === "required" && (
-                      <p className="error-input-message">
-                        Nomor telepon tidak boleh kosong
-                      </p>
-                    )}
-                  {errors.phone_number &&
-                    errors.phone_number.type === "pattern" && (
-                      <p className="error-input-message">
-                        Format nomor telepon salah
-                      </p>
-                    )}
+                  {errors.phone && errors.phone === "required" && (
+                    <p className="error-input-message">
+                      Nomor telepon tidak boleh kosong
+                    </p>
+                  )}
+                  {errors.phone && errors.phone.type === "pattern" && (
+                    <p className="error-input-message">
+                      Format nomor telepon salah
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="form-input-content">
@@ -193,7 +204,12 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   <span>
                     <i className="fas fa-envelope"></i>
                   </span>
-                  <p>Email</p>
+                  <p>
+                    Email{" "}
+                    <span title="Harus diisi" className="input-info">
+                      *
+                    </span>
+                  </p>
                 </label>
                 <div className="form-input">
                   <input
@@ -231,15 +247,20 @@ const UserForm = ({ provinceList, onSubmitState }) => {
             <div className="address-group">
               <div className="form-input-content">
                 <label className="form-input-label">
-                  <p>Provinsi</p>
+                  <p>
+                    Provinsi{" "}
+                    <span title="Harus diisi" className="input-info">
+                      *
+                    </span>
+                  </p>
                 </label>
                 <div className="form-input">
                   <select
                     ref={register({ required: true })}
                     onChange={(e) => {
-                      setProvince(e.target.value);
+                      setProvinsi(e.target.value);
                     }}
-                    name="province"
+                    name="provinsi"
                   >
                     <option value="">Pilih Provinsi</option>
                     {provinceList.length < 1 ? (
@@ -253,7 +274,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                       ))
                     )}
                   </select>
-                  {errors.province && (
+                  {errors.provinsi && (
                     <p className="error-input-message">
                       Provinsi tidak boleh kosong
                     </p>
@@ -262,18 +283,23 @@ const UserForm = ({ provinceList, onSubmitState }) => {
               </div>
               <div className="form-input-content">
                 <label className="form-input-label">
-                  <p>Kelurahan</p>
+                  <p>
+                    Kelurahan{" "}
+                    <span title="Harus diisi" className="input-info">
+                      *
+                    </span>
+                  </p>
                 </label>
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="subdistrict"
+                    name="kelurahan"
                     onChange={(e) => {
-                      setSubdistrict(e.target.value);
+                      setKelurahan(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.subdistrict && (
+                  {errors.kelurahan && (
                     <p className="error-input-message">
                       Kelurahan tidak boleh kosong
                     </p>
@@ -282,18 +308,23 @@ const UserForm = ({ provinceList, onSubmitState }) => {
               </div>
               <div className="form-input-content">
                 <label className="form-input-label">
-                  <p>Kode POS</p>
+                  <p>
+                    Kode POS{" "}
+                    <span title="Harus diisi" className="input-info">
+                      *
+                    </span>
+                  </p>
                 </label>
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="zip_code"
+                    name="kodepos"
                     onChange={(e) => {
-                      setZipCode(e.target.value);
+                      setKodepos(e.target.value);
                     }}
                     type="number"
                   />
-                  {errors.zip_code && (
+                  {errors.kodepos && (
                     <p className="error-input-message">
                       Kode pos tidak boleh kosong
                     </p>
@@ -308,17 +339,22 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 <span>
                   <i className="fas fa-map-marker-alt"></i>
                 </span>
-                <p>Alamat Lengkap</p>
+                <p>
+                  Alamat Lengkap{" "}
+                  <span title="Harus diisi" className="input-info">
+                    *
+                  </span>
+                </p>
               </label>
               <div className="form-input">
                 <textarea
                   ref={register({ required: true })}
-                  name="address"
+                  name="alamat"
                   onChange={(e) => {
-                    setAddress(e.target.value);
+                    setAlamat(e.target.value);
                   }}
                 ></textarea>
-                {errors.address && (
+                {errors.alamat && (
                   <p className="error-input-message">
                     Alamat lengkap tidak boleh kosong
                   </p>
@@ -350,16 +386,12 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   {latitude ? (
                     <div className="share-location-info">
                       <textarea
-                        ref={register({ required: true })}
-                        name="location_address"
                         onChange={(e) => {
                           e.preventDefault();
-                          setLocationAddress(e.target.value);
+                          setCurrentLocation(e.target.value);
                         }}
-                        value={location_address}
-                      >
-                        {location_address}
-                      </textarea>
+                        value={currentLocation}
+                      ></textarea>
 
                       {/* <div className="message">
                         <p>
@@ -368,20 +400,13 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                         </p>
                       </div> */}
                     </div>
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
                   <button type="button" onClick={() => getLocation()}>
                     Bagikan Lokasi
                   </button>
                 </div>
               </div>
               <div className="form-input-info">
-                {errors.location_address && (
-                  <p className="error-input-message">
-                    Alamat lokasi tidak boleh kosong
-                  </p>
-                )}
                 <p>
                   *Bagikan lokasi kamu supaya tim I-RURAL bisa mengetahui titik
                   koordinat lokasi kamu secara detail
@@ -402,10 +427,4 @@ const UserForm = ({ provinceList, onSubmitState }) => {
   );
 };
 
-const mapStateToProps = (registrations) => {
-  return {
-    registrations,
-  };
-};
-
-export default connect(mapStateToProps)(UserForm);
+export default UserForm;

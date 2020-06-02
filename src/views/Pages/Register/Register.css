@@ -22,6 +22,15 @@ select:focus {
   color: #29293e;
 }
 
+.input-info {
+  cursor: pointer;
+  border: none;
+}
+
+.input-info[title]:hover:after {
+  border: none;
+}
+
 .form-header-button {
   display: flex;
   flex-direction: column;
