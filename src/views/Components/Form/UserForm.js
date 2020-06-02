@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import { useDispatch, connect } from "react-redux";
 import { userRegistration } from "../../../Redux/actions/registration";
 
+import { useForm } from "react-hook-form";
+
 const UserForm = ({ provinceList, onSubmitState }) => {
+  const { register, handleSubmit, errors } = useForm();
+
   const dispatch = useDispatch();
 
   const [fullname, setFullname] = useState("");
@@ -14,17 +18,6 @@ const UserForm = ({ provinceList, onSubmitState }) => {
   const [subdistrict, setSubdistrict] = useState("");
   const [zip_code, setZipCode] = useState("");
   const [address, setAddress] = useState("");
-
-  const [fullnameInputError, setFullnameInputError] = useState(false);
-  const [ktpInputError, setKtpInputError] = useState(false);
-  const [phoneNumberInputError, setPhoneNumberInputError] = useState(false);
-  const [emailInputError, setEmailInputError] = useState(false);
-  const [provinceInputError, setProvinceInputError] = useState(false);
-  const [subdistrictInputError, setSubdistrictInputError] = useState(false);
-  const [zipCodeInputError, setZipCodeInputError] = useState(false);
-  const [addressInputError, setAddressInputError] = useState(false);
-
-  const [validate, setValidate] = useState(false);
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
@@ -80,7 +73,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
     return null;
   };
 
-  const userRegistrationSubmit = (e) => {
+  const userRegistrationSubmit = async (e) => {
     const data = {
       fullname,
       ktp,
@@ -98,13 +91,17 @@ const UserForm = ({ provinceList, onSubmitState }) => {
     dispatch(userRegistration(data))
       .then(onSubmitState)
       .catch((error) => {
-        console.log(error);
-        alert(error);
+        if (location_address === null) {
+          alert("Bagikan lokasi anda terlebih dahulu");
+        } else {
+          console.log(error);
+          alert("Sedang terjadi kesalahan pada server, silahkan coba lagi.");
+        }
       });
   };
 
   return (
-    <div className="form-body">
+    <form className="form-body" onSubmit={handleSubmit(userRegistrationSubmit)}>
       <div className="form-body-group">
         <div className="form-body-content">
           <div className="form-title">
@@ -121,13 +118,18 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 </label>
                 <div className="form-input">
                   <input
-                    required
+                    ref={register({ required: true })}
                     name="fullname"
                     onChange={(e) => {
                       setFullname(e.target.value);
                     }}
                     type="text"
                   />
+                  {errors.fullname && (
+                    <p className="error-input-message">
+                      Nama tidak boleh kosong
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="form-input-content">
@@ -139,13 +141,18 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 </label>
                 <div className="form-input">
                   <input
-                    required
+                    ref={register({ required: true })}
                     name="ktp"
                     onChange={(e) => {
                       setKtp(e.target.value);
                     }}
-                    type="text"
+                    type="number"
                   />
+                  {errors.ktp && (
+                    <p className="error-input-message">
+                      No KTP tidak boleh kosong
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="form-input-content">
@@ -157,13 +164,28 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 </label>
                 <div className="form-input">
                   <input
-                    required
+                    ref={register({
+                      required: true,
+                      pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
+                    })}
                     name="phone_number"
                     onChange={(e) => {
                       setPhoneNumber(e.target.value);
                     }}
                     type="text"
                   />
+                  {errors.phone_number &&
+                    errors.phone_number.type === "required" && (
+                      <p className="error-input-message">
+                        Nomor telepon tidak boleh kosong
+                      </p>
+                    )}
+                  {errors.phone_number &&
+                    errors.phone_number.type === "pattern" && (
+                      <p className="error-input-message">
+                        Format nomor telepon salah
+                      </p>
+                    )}
                 </div>
               </div>
               <div className="form-input-content">
@@ -175,13 +197,24 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 </label>
                 <div className="form-input">
                   <input
-                    required
+                    ref={register({
+                      required: true,
+                      pattern: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+                    })}
                     name="email"
                     onChange={(e) => {
-                      setEmail(e.target.value);
+                      setEmail(e.target.value.toLocaleLowerCase());
                     }}
                     type="email"
                   />
+                  {errors.email && errors.email.type === "required" && (
+                    <p className="error-input-message">
+                      Email tidak boleh kosong
+                    </p>
+                  )}
+                  {errors.email && errors.email.type === "pattern" && (
+                    <p className="error-input-message">Format email salah</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -202,10 +235,11 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 </label>
                 <div className="form-input">
                   <select
-                    name="province"
+                    ref={register({ required: true })}
                     onChange={(e) => {
                       setProvince(e.target.value);
                     }}
+                    name="province"
                   >
                     <option value="">Pilih Provinsi</option>
                     {provinceList.length < 1 ? (
@@ -219,6 +253,11 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                       ))
                     )}
                   </select>
+                  {errors.province && (
+                    <p className="error-input-message">
+                      Provinsi tidak boleh kosong
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="form-input-content">
@@ -227,13 +266,18 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 </label>
                 <div className="form-input">
                   <input
-                    required
+                    ref={register({ required: true })}
                     name="subdistrict"
                     onChange={(e) => {
                       setSubdistrict(e.target.value);
                     }}
                     type="text"
                   />
+                  {errors.subdistrict && (
+                    <p className="error-input-message">
+                      Kelurahan tidak boleh kosong
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="form-input-content">
@@ -242,13 +286,18 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 </label>
                 <div className="form-input">
                   <input
-                    required
+                    ref={register({ required: true })}
                     name="zip_code"
                     onChange={(e) => {
                       setZipCode(e.target.value);
                     }}
-                    type="text"
+                    type="number"
                   />
+                  {errors.zip_code && (
+                    <p className="error-input-message">
+                      Kode pos tidak boleh kosong
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -263,12 +312,17 @@ const UserForm = ({ provinceList, onSubmitState }) => {
               </label>
               <div className="form-input">
                 <textarea
-                  required
+                  ref={register({ required: true })}
                   name="address"
                   onChange={(e) => {
                     setAddress(e.target.value);
                   }}
                 ></textarea>
+                {errors.address && (
+                  <p className="error-input-message">
+                    Alamat lengkap tidak boleh kosong
+                  </p>
+                )}
               </div>
             </div>
             <div className="form-input-content ">
@@ -279,33 +333,34 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 <p>Bagikan Lokasi</p>
               </label>
 
-              {location_address ? (
+              {latitude ? (
                 <div className="location-info">
                   <p
+                    name="latitude"
                     onClick={() => redirectMaps()}
                     className="location-text-url"
                   >
                     https://maps.google.com/maps?z=7&q={latitude},{longitude}
                   </p>
                 </div>
-              ) : (
-                <> </>
-              )}
+              ) : null}
 
               <div className="form-input">
                 <div className="share-location-container">
-                  {location_address ? (
+                  {latitude ? (
                     <div className="share-location-info">
                       <textarea
-                        required
+                        ref={register({ required: true })}
                         name="location_address"
                         onChange={(e) => {
+                          e.preventDefault();
                           setLocationAddress(e.target.value);
                         }}
                         value={location_address}
                       >
                         {location_address}
                       </textarea>
+
                       {/* <div className="message">
                         <p>
                           *Bagikan lokasi kamu supaya tim I-RURAL bisa
@@ -316,10 +371,17 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   ) : (
                     <></>
                   )}
-                  <button onClick={() => getLocation()}>Bagikan Lokasi</button>
+                  <button type="button" onClick={() => getLocation()}>
+                    Bagikan Lokasi
+                  </button>
                 </div>
               </div>
               <div className="form-input-info">
+                {errors.location_address && (
+                  <p className="error-input-message">
+                    Alamat lokasi tidak boleh kosong
+                  </p>
+                )}
                 <p>
                   *Bagikan lokasi kamu supaya tim I-RURAL bisa mengetahui titik
                   koordinat lokasi kamu secara detail
@@ -331,11 +393,12 @@ const UserForm = ({ provinceList, onSubmitState }) => {
       </div>
 
       <div className="submit-button">
-        <button type="submit" onClick={() => userRegistrationSubmit()}>
+        <button type="submit">
+          {/* onClick={() => userRegistrationSubmit()} */}
           Daftar Sebagai Pengguna
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 
