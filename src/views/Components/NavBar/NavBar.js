@@ -6,14 +6,13 @@ import "./Navbar.css";
 
 import Logo from "../../../assets/images/irural-logo.jpeg";
 
-const Navbar = ({ openNav }) => {
+const Navbar = ({ openNav, contactScroll }) => {
   return (
     <nav>
       <section className="navbar-section">
         <div className="navbar-container">
-          <div className="navbar-logo">
-            <img src={Logo} alt="navbar-logo.png" />
-          </div>
+          <img className="navbar-logo" src={Logo} alt="navbar-logo.png" />
+
           <div className="sidebar-button">
             <span onClick={openNav} id="navButton">
               <i className="fas fa-bars"></i>
@@ -60,7 +59,7 @@ const Navbar = ({ openNav }) => {
               <li>
                 <Scroll
                   activeClass="active"
-                  to="contact"
+                  to={contactScroll}
                   spy={true}
                   smooth={true}
                   offset={-70}
@@ -72,9 +71,18 @@ const Navbar = ({ openNav }) => {
             </ul>
           </div>
           <div className="navbar-button">
-            <Link to={"/register"}>
-              <button>Daftar I-RURAL</button>
-            </Link>
+            <Scroll
+              activeClass="active"
+              to="registration"
+              spy={true}
+              smooth={true}
+              offset={0}
+              duration={30}
+            >
+              <Link to={{ pathname: "/register", userFormActive: true }}>
+                <button>Daftar I-RURAL</button>
+              </Link>
+            </Scroll>
           </div>
         </div>
       </section>

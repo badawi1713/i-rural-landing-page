@@ -7,19 +7,21 @@
     -webkit-box-shadow: 0px 7px 34px rgba(0, 0, 0, 0.07);
     -moz-box-shadow: 0px 7px 34px rgba(0, 0, 0, 0.07);
     box-shadow: 0px 7px 34px rgba(0, 0, 0, 0.07);
+
 }
 
 .navbar-container {
+    padding: 10px 25px;
     display: flex;
     align-items: center;
+    align-content: center;
     justify-content: space-between;
-    padding: 10px 25px;
     align-items: center;
 }
 
-.navbar-logo img {
-    width: 130px;
-    height: 40px;
+.navbar-logo {
+    width: 99px;
+    height: 37px;
 }
 
 .sidebar-button {
@@ -58,7 +60,7 @@
         padding: 20px 100px;
     }
 
-    .navbar-logo img {
+    .navbar-logo {
         width: 150px;
         height: 60px;
     }
@@ -92,7 +94,7 @@
         background-color: #ed5f64;
         background-image: linear-gradient(110.27deg, #ed5f64 0%, #f03840 100%);
         border-radius: 5px;
-        padding: 15px 25px;
+        padding: 15px;
         width: 100%;
         color: #ffffff;
         font-weight: 600;

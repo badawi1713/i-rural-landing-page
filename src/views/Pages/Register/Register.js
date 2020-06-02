@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-
+import { withRouter } from "react-router-dom";
 import "./Register.css";
 
 import ISPForm from "../../Components/Form/ISPForm";
 import UserForm from "../../Components/Form/UserForm";
+import Message from "../../Components/Message/Message";
 import NavBar from "../../Components/NavBar/NavBar";
 import SideBar from "../../Components/SideBar/SideBar";
 import Contact from "../../Components/Contact/Contact";
 import Footer from "../../Components/Footer/Footer";
 
-const RegisterPage = () => {
-  const [showUserForm, setShowUserForm] = useState(true);
+const RegisterPage = (props) => {
+  const [showUserForm, setShowUserForm] = useState(
+    props.location.userFormActive || true
+  );
+
+  const [onSubmit, setOnSubmit] = useState(false);
 
   const provinceData = [
     {
@@ -31,123 +36,123 @@ const RegisterPage = () => {
     },
     {
       id: 5,
-      name: "Gorontalo",
+      name: "D.I Yogyakarta",
     },
     {
       id: 6,
-      name: "Jakarta",
+      name: "Gorontalo",
     },
     {
       id: 7,
-      name: "Jambi",
+      name: "Jakarta",
     },
     {
       id: 8,
-      name: "Jawa Barat",
+      name: "Jambi",
     },
     {
       id: 9,
-      name: "Jawa Tengah",
+      name: "Jawa Barat",
     },
     {
       id: 10,
-      name: "Jawa Timur",
+      name: "Jawa Tengah",
     },
     {
       id: 11,
-      name: "Kalimantan Barat",
+      name: "Jawa Timur",
     },
     {
       id: 12,
-      name: "Kalimantan Selatan",
+      name: "Kalimantan Barat",
     },
     {
       id: 13,
-      name: "Kalimantan Tengah",
+      name: "Kalimantan Selatan",
     },
     {
       id: 14,
-      name: "Kalimantan Timur",
+      name: "Kalimantan Tengah",
     },
     {
       id: 15,
-      name: "Kalimantan Utara",
+      name: "Kalimantan Timur",
     },
     {
       id: 16,
-      name: "Kepulauan Bangka Belitung",
+      name: "Kalimantan Utara",
     },
     {
       id: 17,
-      name: "Kepulauan Riau",
+      name: "Kep. Bangka Belitung",
     },
     {
       id: 18,
-      name: "Lampung",
+      name: "Kepulauan Riau",
     },
     {
       id: 19,
-      name: "Maluku",
+      name: "Lampung",
     },
     {
       id: 20,
-      name: "Maluku Utara",
+      name: "Maluku",
     },
     {
       id: 21,
-      name: "Nusa Tenggara Barat",
+      name: "Maluku Utara",
     },
     {
       id: 22,
-      name: "Nusa Tenggara Timur",
+      name: "Nusa Tenggara Barat",
     },
     {
       id: 23,
-      name: "Papua",
+      name: "Nusa Tenggara Timur",
     },
     {
       id: 24,
-      name: "Papua Barat",
+      name: "Papua",
     },
     {
       id: 25,
-      name: "Riau",
+      name: "Papua Barat",
     },
     {
       id: 26,
-      name: "Sulawesi Barat",
+      name: "Riau",
     },
     {
       id: 27,
-      name: "Sulawesi Selatan",
+      name: "Sulawesi Barat",
     },
     {
       id: 28,
-      name: "Sulawesi Tengah",
+      name: "Sulawesi Selatan",
     },
     {
       id: 29,
-      name: "Sulawesi Tenggara",
+      name: "Sulawesi Tengah",
     },
     {
       id: 30,
-      name: " Sulawesi Utara",
+      name: "Sulawesi Tenggara",
     },
     {
       id: 31,
-      name: "Sumatra Barat",
+      name: " Sulawesi Utara",
     },
     {
       id: 32,
-      name: "Sumatra Selatan",
+      name: "Sumatra Barat",
     },
     {
       id: 33,
-      name: "Sumatra Utara",
+      name: "Sumatra Selatan",
     },
     {
       id: 34,
-      name: "Yogyakarta",
+      name: "Sumatra Utara",
     },
   ];
 
@@ -166,50 +171,65 @@ const RegisterPage = () => {
   const closeNav = () => {
     document.getElementById("mySidenav").style.width = "0";
   };
+
+  const onSubmitForm = () => {
+    setOnSubmit(true);
+  };
+
   return (
     <div>
-      <SideBar />
-      <NavBar openNav={() => openNav()} />
+      <SideBar contactScroll="home" />
+      <NavBar contactScroll="home" openNav={() => openNav()} />
       <div onClick={() => closeNav()}>
-        <section className="form-section">
-          <div className="form-section-container">
-            <div className="form-header">
-              <div className="form-title">
-                <p>Daftar I-RURAL</p>
+        {!onSubmit ? (
+          <section id="registration" className="form-section">
+            <div className="form-section-container">
+              <div className="form-header">
+                <div className="form-title">
+                  <p>Daftar I-RURAL</p>
+                </div>
+                {showUserForm ? (
+                  <div className="form-header-button">
+                    <button onClick={() => registerAsUser()}>
+                      Daftar Sebagai Pengguna
+                    </button>
+                    <button
+                      style={{ opacity: 0.3 }}
+                      onClick={() => registerAsISP()}
+                    >
+                      Daftar Sebagai ISP
+                    </button>
+                  </div>
+                ) : (
+                  <div className="form-header-button">
+                    <button
+                      style={{ opacity: 0.3 }}
+                      onClick={() => registerAsUser()}
+                    >
+                      Daftar Sebagai Pengguna
+                    </button>
+                    <button onClick={() => registerAsISP()}>
+                      Daftar Sebagai ISP
+                    </button>
+                  </div>
+                )}
               </div>
               {showUserForm ? (
-                <div className="form-header-button">
-                  <button onClick={() => registerAsUser()}>
-                    Daftar Sebagai Pengguna
-                  </button>
-                  <button
-                    style={{ opacity: 0.3 }}
-                    onClick={() => registerAsISP()}
-                  >
-                    Daftar Sebagai ISP
-                  </button>
-                </div>
+                <UserForm
+                  onSubmitState={() => onSubmitForm()}
+                  provinceList={provinceData}
+                />
               ) : (
-                <div className="form-header-button">
-                  <button
-                    style={{ opacity: 0.3 }}
-                    onClick={() => registerAsUser()}
-                  >
-                    Daftar Sebagai Pengguna
-                  </button>
-                  <button onClick={() => registerAsISP()}>
-                    Daftar Sebagai ISP
-                  </button>
-                </div>
+                <ISPForm
+                  onSubmitState={() => onSubmitForm()}
+                  provinceList={provinceData}
+                />
               )}
             </div>
-            {showUserForm ? (
-              <UserForm provinceList={provinceData} />
-            ) : (
-              <ISPForm provinceList={provinceData} />
-            )}
-          </div>
-        </section>
+          </section>
+        ) : (
+          <Message />
+        )}
         <Contact />
         <Footer />
       </div>
@@ -217,4 +237,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default withRouter(RegisterPage);

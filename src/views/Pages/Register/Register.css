@@ -22,6 +22,15 @@ select:focus {
   color: #29293e;
 }
 
+.input-info {
+  cursor: pointer;
+  border: none;
+}
+
+.input-info[title]:hover:after {
+  border: none;
+}
+
 .form-header-button {
   display: flex;
   flex-direction: column;
@@ -102,13 +111,21 @@ select:focus {
   color: #78788c;
 }
 
+.error-input-message {
+  margin-top: 5px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #f03840;
+}
+
 .form-input input[type=email],
+input[type=number],
 input[type=text],
 select,
 textarea {
   border: 1px solid #78788c;
   border-radius: 5px;
-  padding: 14px 25px;
+  padding: 15px;
   width: 100%;
   font-style: normal;
   font-weight: normal;
@@ -137,13 +154,20 @@ textarea {
 
 .share-location-info {
   margin-bottom: 15px;
-  display: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .share-location-info textarea {
-  height: auto;
+  padding: 15px;
   width: 100%;
+  height: 130px;
   margin-bottom: 15px;
+  animation: fadein 2s;
+  -moz-animation: fadein 2s;
+  -webkit-animation: fadein 2s;
+  -o-animation: fadein 2s;
 }
 
 .share-location-info .message p {
@@ -164,6 +188,7 @@ textarea {
 
 .share-location-container button,
 .upload-file-input {
+
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -179,16 +204,25 @@ textarea {
 }
 
 .location-info {
+  animation: fadein 2s;
+  -moz-animation: fadein 2s;
+  -webkit-animation: fadein 2s;
+  -o-animation: fadein 2s;
   margin-bottom: 15px;
-  display: none;
+  display: inline-block;
   width: 100%;
   word-break: break-word;
 }
 
-.location-info a {
+.location-text-url {
   font-size: 16px;
   text-decoration-line: underline;
   color: #1d499d;
+  cursor: pointer;
+}
+
+.form-input-info {
+  display: inline-block;
 }
 
 .form-input-info p {
@@ -202,7 +236,7 @@ textarea {
 .submit-button {
   display: flex;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .submit-button button {
@@ -323,6 +357,7 @@ textarea {
   }
 
   .form-input input[type=email],
+  input[type=number],
   input[type=text],
   select,
   textarea {
@@ -378,14 +413,14 @@ textarea {
   }
 
   .share-location-info {
-    display: none;
+    display: flex;
     width: 75%;
     height: auto;
     margin-right: 25px;
     margin-bottom: 0px;
   }
 
-  .share-location-info .message p {
+  .share-location-info .message {
     display: none;
   }
 
@@ -397,14 +432,18 @@ textarea {
 
   .location-info {
     margin-bottom: 20px;
-    display: none;
+    display: inline-block;
   }
 
-  .location-info a {
+  .location-text-url {
     font-size: 20px;
     text-decoration-line: underline;
     color: #1d499d;
     width: 100%;
+  }
+
+  .form-input-info {
+    display: inline-block;
   }
 
   .form-input-info p {

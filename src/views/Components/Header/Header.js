@@ -9,7 +9,7 @@ const Header = () => {
       <section className="hero-section">
         <div className="hero-container">
           <div className="hero-title">
-            <p>Di Desa Di Kota Semua Bisa Internetan</p>
+            <h1>Di Desa Di Kota Semua Bisa Internetan</h1>
           </div>
           <p>
             Web I-RURAL ini memfasilitasi pertemuan antara calon pengguna
@@ -19,10 +19,10 @@ const Header = () => {
             di area rural tersebut
           </p>
           <div className="hero-button">
-            <Link to={"/register"}>
+            <Link to={{ pathname: "/register", userFormActive: true }}>
               <button>Daftar sebagai Pengguna</button>
             </Link>
-            <Link to={"/register"}>
+            <Link to={{ pathname: "/register", userFormActive: false }}>
               <button>Daftar sebagai ISP</button>
             </Link>
           </div>

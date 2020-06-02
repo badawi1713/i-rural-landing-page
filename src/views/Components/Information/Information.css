@@ -1,8 +1,8 @@
 .information-container {
-    padding: 40px 20px;
+    padding: 50px 25px 70px 25px;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 70px;
 }
 
 .information-content {
@@ -42,7 +42,6 @@
     direction: ltr;
     font-weight: bold;
     font-size: 22px;
-    font-weight: 600;
     margin-bottom: 10px;
     color: #29293e;
     line-height: 30px;
@@ -107,10 +106,10 @@
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {
     .information-container {
-        padding: 80px 100px;
+        padding: 90px 100px 120px 100px;
         display: grid;
         grid-template-rows: repeat(2, 1fr);
-        gap: 60px;
+        gap: 120px;
     }
 
     .information-content {
@@ -140,7 +139,6 @@
     }
 
     .text-information h1 {
-        font-weight: 600;
         font-size: 30px;
         font-weight: bold;
         margin-bottom: 25px;
@@ -160,6 +158,11 @@
         color: #29293e;
         margin-bottom: 25px;
         line-height: 41px;
+    }
+
+    .configuration-list p:nth-child(1) {
+        font-size: 20px;
+        line-height: 32px;
     }
 
     .configuration-list p:nth-child(2) {
