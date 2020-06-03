@@ -11,18 +11,18 @@ const UserForm = ({ provinceList, onSubmitState }) => {
 
   const dispatch = useDispatch();
 
-  const [nama, setNama] = useState("");
-  const [nik, setNik] = useState("");
-  const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
+  const [identity_number, setIdentityNumber] = useState("");
+  const [contact_number, setContactNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [provinsi, setProvinsi] = useState("");
-  const [kelurahan, setKelurahan] = useState("");
-  const [kodepos, setKodepos] = useState("");
-  const [alamat, setAlamat] = useState("");
+  const [province, setProvince] = useState("");
+  const [subdistrict, setSubdistrict] = useState("");
+  const [zip_code, setZipCode] = useState("");
+  const [address, setAddress] = useState("");
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [currentLocation, setCurrentLocation] = useState(null);
+  const [location, setLocation] = useState("");
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -41,7 +41,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
           })
           .then((data) => {
             console.log(data);
-            setCurrentLocation(data.display_name);
+            setLocation(data.display_name);
           })
           .catch((error) => alert(error));
       }, handleLocationError);
@@ -80,15 +80,15 @@ const UserForm = ({ provinceList, onSubmitState }) => {
 
   const userRegistrationSubmit = async (e) => {
     const data = {
-      nama,
-      nik,
-      phone,
+      name,
+      identity_number,
+      contact_number,
       email,
-      provinsi,
-      kelurahan,
-      kodepos,
-      alamat,
-      currentLocation,
+      province,
+      subdistrict,
+      zip_code,
+      address,
+      // location,
     };
 
     dispatch(userRegistration(data))
@@ -123,13 +123,13 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="nama"
+                    name="name"
                     onChange={(e) => {
-                      setNama(e.target.value);
+                      setName(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.nama && (
+                  {errors.name && (
                     <p className="error-input-message">
                       *Nama tidak boleh kosong
                     </p>
@@ -151,13 +151,13 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="nik"
+                    name="identity_number"
                     onChange={(e) => {
-                      setNik(e.target.value);
+                      setIdentityNumber(e.target.value);
                     }}
                     type="number"
                   />
-                  {errors.nik && (
+                  {errors.identity_number && (
                     <p className="error-input-message">
                       *No KTP tidak boleh kosong
                     </p>
@@ -181,13 +181,13 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                     ref={register({
                       required: true,
                     })}
-                    name="phone"
+                    name="contact_number"
                     onChange={(e) => {
-                      setPhone(e.target.value);
+                      setContactNumber(e.target.value);
                     }}
                     type="number"
                   />
-                  {errors.phone && (
+                  {errors.contact_number && (
                     <p className="error-input-message">
                       *Nomor telepon tidak boleh kosong
                     </p>
@@ -253,9 +253,9 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                   <select
                     ref={register({ required: true })}
                     onChange={(e) => {
-                      setProvinsi(e.target.value);
+                      setProvince(e.target.value);
                     }}
-                    name="provinsi"
+                    name="province"
                   >
                     <option value="">Pilih Provinsi</option>
                     {provinceList.length < 1 ? (
@@ -269,7 +269,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                       ))
                     )}
                   </select>
-                  {errors.provinsi && (
+                  {errors.province && (
                     <p className="error-input-message">
                       *Provinsi tidak boleh kosong
                     </p>
@@ -288,13 +288,13 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="kelurahan"
+                    name="subdistrict"
                     onChange={(e) => {
-                      setKelurahan(e.target.value);
+                      setSubdistrict(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.kelurahan && (
+                  {errors.subdistrict && (
                     <p className="error-input-message">
                       *Kelurahan tidak boleh kosong
                     </p>
@@ -313,13 +313,13 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="kodepos"
+                    name="_code"
                     onChange={(e) => {
-                      setKodepos(e.target.value);
+                      setZipCode(e.target.value);
                     }}
                     type="number"
                   />
-                  {errors.kodepos && (
+                  {errors.zip_code && (
                     <p className="error-input-message">
                       *Kode pos tidak boleh kosong
                     </p>
@@ -344,12 +344,12 @@ const UserForm = ({ provinceList, onSubmitState }) => {
               <div className="form-input">
                 <textarea
                   ref={register({ required: true })}
-                  name="alamat"
+                  name="address"
                   onChange={(e) => {
-                    setAlamat(e.target.value);
+                    setAddress(e.target.value);
                   }}
                 ></textarea>
-                {errors.alamat && (
+                {errors.address && (
                   <p className="error-input-message">
                     *Alamat lengkap tidak boleh kosong
                   </p>
@@ -383,9 +383,9 @@ const UserForm = ({ provinceList, onSubmitState }) => {
                       <textarea
                         onChange={(e) => {
                           e.preventDefault();
-                          setCurrentLocation(e.target.value);
+                          setLocation(e.target.value);
                         }}
-                        value={currentLocation}
+                        value={location}
                       ></textarea>
 
                       {/* <div className="message">

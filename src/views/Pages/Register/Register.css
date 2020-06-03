@@ -114,8 +114,22 @@ select:focus {
 .error-input-message {
   margin-top: 5px;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 12px;
   color: #f03840;
+}
+
+.error-input-file-message {
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 12px;
+  color: #f03840;
+}
+
+.files-label {
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  color: #29293e;
 }
 
 .form-input input[type=email],
@@ -177,10 +191,17 @@ textarea {
   color: #f03f46;
 }
 
-.share-location-container,
-.upload-file-container {
+.share-location-container {
   display: flex;
   align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.upload-file-container {
+  display: flex;
+  align-items: flex-start;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
@@ -275,6 +296,28 @@ textarea {
     font-size: 30px;
     color: #29293e;
   }
+
+  .error-input-message {
+    margin-top: 5px;
+    font-weight: 400;
+    font-size: 15px;
+    color: #f03840;
+  }
+
+  .error-input-file-message {
+    margin-top: 20px;
+    font-weight: 400;
+    font-size: 15px;
+    color: #f03840;
+  }
+
+  .files-label {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #29293e;
+  }
+
 
   .form-header-button {
     display: flex;
@@ -389,16 +432,21 @@ textarea {
     height: 150px;
   }
 
-  .share-location-container,
-  .upload-file-container {
+  .share-location-container {
     display: flex;
     flex-direction: row;
     margin-bottom: 0px;
     align-items: center;
   }
 
-  .form-input .share-location-container button,
-  .upload-file-input {
+  .upload-file-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .form-input .share-location-container button {
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
@@ -409,6 +457,19 @@ textarea {
     border-radius: 5px;
     width: 25%;
     align-self: flex-end;
+    cursor: pointer;
+  }
+
+  .upload-file-input {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    padding: 15px 25px;
+    background-color: #456dfc;
+    background-image: linear-gradient(322.36deg, #456dfc -1.85%, #62b2ff 100%);
+    border-radius: 5px;
+    width: 25%;
     cursor: pointer;
   }
 

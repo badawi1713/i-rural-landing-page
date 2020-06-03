@@ -1,7 +1,7 @@
 const initialValue = {
   userRegistrationData: [],
   ispRegistrationData: [],
-  ispFileData: [],
+  ispFilesData: [],
   errorMessage: [],
   isPending: false,
   isRejected: false,
@@ -54,26 +54,26 @@ const registrationReducers = (state = initialValue, action) => {
         isFulfilled: true,
         ispRegistrationData: action.payload,
       };
-    case "POST_ISP_FILE_PENDING":
+    case "POST_ISP_FILES_UPLOAD_PENDING":
       return {
         ...state,
         isPending: true,
         isRejected: false,
         isFulfilled: false,
       };
-    case "POST_ISP_FILE_REJECTED":
+    case "POST_ISP_FILES_UPLOAD_REJECTED":
       return {
         ...state,
         isPending: false,
         isRejected: true,
         errorMessage: action.payload.data,
       };
-    case "POST_ISP_FILE_FULFILLED":
+    case "POST_ISP_FILES_UPLOAD_FULFILLED":
       return {
         ...state,
         isPending: false,
         isFulfilled: true,
-        ispFileData: action.payload,
+        ispFilesData: action.payload,
       };
     default:
       return state;

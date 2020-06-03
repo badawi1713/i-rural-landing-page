@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import {
   ispRegistration,
-  // uploadIspFile,
+  uploadIspFile,
 } from "../../../Redux/actions/registration";
 
 const ISPForm = ({ provinceList, onSubmitState }) => {
@@ -14,20 +14,23 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
   const fileInput = useRef();
 
   const { register, handleSubmit, errors } = useForm();
-  const [nama_isp, setNamaIsp] = useState("");
-  const [nama, setNama] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [provinsi, setProvinsi] = useState("");
-  const [kelurahan, setKelurahan] = useState("");
-  const [kodepos, setKodepos] = useState("");
-  const [alamat, setAlamat] = useState("");
-  const [filename, setFilename] = useState(null);
-  const [photo, setIspFiles] = useState(null);
+  const [isp_name, setIspName] = useState("");
+  const [name, setName] = useState("");
+  const [isp_contact_number, setIspContactNumber] = useState("");
+  const [isp_email, setIspEmail] = useState("");
+  const [province, setProvince] = useState("");
+  const [subdistrict, setSubdistrict] = useState("");
+  const [zip_code, setZipCode] = useState("");
+  const [address, setAddress] = useState("");
+  // const [filename, setFilename] = useState(null);
+  // const [photo, setIspFiles] = useState(null);
+
+  const [files, setFiles] = useState("");
+  const [filename, setFilename] = useState([]);
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [currentLocation, setCurrentLocation] = useState(null);
+  const [location, setLocation] = useState("");
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -46,7 +49,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
           })
           .then((data) => {
             console.log(data);
-            setCurrentLocation(data.display_name);
+            setLocation(data.display_name);
           })
           .catch((error) => alert(error));
       }, handleLocationError);
@@ -83,21 +86,49 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
     return null;
   };
 
-  const ispRegistrationSubmit = async (e) => {
-    const data = {
-      nama_isp,
-      nama,
-      phone,
-      email,
-      provinsi,
-      kelurahan,
-      kodepos,
-      alamat,
-      currentLocation,
+  const inputFileHandler = (e) => {
+    setFiles(e.target.files);
+    setFilename(e.target.files.length);
+
+    fileUploadHandler();
+  };
+
+  const fileUploadHandler = (e) => {
+    // e.preventDefault();
+    const filesData = new FormData();
+
+    for (const key of Object.keys(files)) {
+      filesData.append("file", files[key]);
+    }
+
+    dispatch(uploadIspFile(filesData))
+      // .then(onSubmitState)
+      .then((res) => {
+        console.log(res);
+        console.log("file", filesData);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Sedang terjadi kesalahan pada server, silahkan coba lagi.");
+      });
+  };
+
+  const ispRegistrationSubmit = (e) => {
+    const ispData = {
+      isp_name,
+      name,
+      isp_contact_number,
+      isp_email,
+      province,
+      subdistrict,
+      zip_code,
+      address,
+      location,
     };
 
-    dispatch(ispRegistration(data))
+    dispatch(ispRegistration(ispData))
       .then(onSubmitState)
+      .then((res) => console.log(res))
       .catch((error) => {
         console.log(error);
         alert("Sedang terjadi kesalahan pada server, silahkan coba lagi.");
@@ -128,13 +159,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="nama_isp"
+                    name="isp_name"
                     onChange={(e) => {
-                      setNamaIsp(e.target.value);
+                      setIspName(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.nama_isp && (
+                  {errors.isp_name && (
                     <p className="error-input-message">
                       *Nama ISP tidak boleh kosong
                     </p>
@@ -159,18 +190,18 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                       required: true,
                       pattern: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
                     })}
-                    name="email"
+                    name="isp_email"
                     onChange={(e) => {
-                      setEmail(e.target.value.toLocaleLowerCase());
+                      setIspEmail(e.target.value.toLocaleLowerCase());
                     }}
                     type="email"
                   />
-                  {errors.email && errors.email.type === "required" && (
+                  {errors.isp_email && errors.isp_email.type === "required" && (
                     <p className="error-input-message">
                       *Email tidak boleh kosong
                     </p>
                   )}
-                  {errors.email && errors.email.type === "pattern" && (
+                  {errors.isp_email && errors.isp_email.type === "pattern" && (
                     <p className="error-input-message">*Format email salah</p>
                   )}
                 </div>
@@ -190,13 +221,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="nama"
+                    name="name"
                     onChange={(e) => {
-                      setNama(e.target.value);
+                      setName(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.nama && (
+                  {errors.name && (
                     <p className="error-input-message">
                       *Contact person tidak boleh kosong
                     </p>
@@ -220,13 +251,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                     ref={register({
                       required: true,
                     })}
-                    name="phone"
+                    name="isp_contact_number"
                     onChange={(e) => {
-                      setPhone(e.target.value);
+                      setIspContactNumber(e.target.value);
                     }}
                     type="number"
                   />
-                  {errors.phone && (
+                  {errors.isp_contact_number && (
                     <p className="error-input-message">
                       *Nomor telepon tidak boleh kosong
                     </p>
@@ -258,9 +289,9 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                   <select
                     ref={register({ required: true })}
                     onChange={(e) => {
-                      setProvinsi(e.target.value);
+                      setProvince(e.target.value);
                     }}
-                    name="provinsi"
+                    name="province"
                   >
                     <option value="">Pilih Provinsi</option>
                     {provinceList.length < 1 ? (
@@ -274,7 +305,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                       ))
                     )}
                   </select>
-                  {errors.provinsi && (
+                  {errors.province && (
                     <p className="error-input-message">
                       *Provinsi tidak boleh kosong
                     </p>
@@ -293,13 +324,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="kelurahan"
+                    name="subdistrict"
                     onChange={(e) => {
-                      setKelurahan(e.target.value);
+                      setSubdistrict(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.kelurahan && (
+                  {errors.subdistrict && (
                     <p className="error-input-message">
                       *Kelurahan tidak boleh kosong
                     </p>
@@ -318,13 +349,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="kodepos"
+                    name="zip_code"
                     onChange={(e) => {
-                      setKodepos(e.target.value);
+                      setZipCode(e.target.value);
                     }}
                     type="number"
                   />
-                  {errors.kodepos && (
+                  {errors.zip_code && (
                     <p className="error-input-message">
                       *Kode pos tidak boleh kosong
                     </p>
@@ -349,12 +380,12 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
               <div className="form-input">
                 <textarea
                   ref={register({ required: true })}
-                  name="alamat"
+                  name="address"
                   onChange={(e) => {
-                    setAlamat(e.target.value);
+                    setAddress(e.target.value);
                   }}
                 ></textarea>
-                {errors.alamat && (
+                {errors.address && (
                   <p className="error-input-message">
                     *Alamat lengkap tidak boleh kosong
                   </p>
@@ -387,9 +418,9 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                         name="currentLocation"
                         onChange={(e) => {
                           e.preventDefault();
-                          setCurrentLocation(e.target.value);
+                          setLocation(e.target.value);
                         }}
-                        value={currentLocation}
+                        value={location}
                       ></textarea>
                       {/* <div className="message">
                         <p>
@@ -443,13 +474,16 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                     id="selectedFile"
                     type="file"
                     accept="application/pdf"
-                    style={(fileInput, { display: "none" })}
-                    ref={register({ required: true })}
-                    name="photo"
+                    style={{ display: "none" }}
+                    ref={(fileInput, register({ required: true }))}
+                    name="files"
                     onChange={(e) => {
-                      setIspFiles(e.target.files[0]);
-                      setFilename(e.target.value);
+                      inputFileHandler(e);
+                      // setIspFiles(e.target.files[0]);
+                      // setFilename(e.target.value);
+                      // console.log(files[0].name);
                     }}
+                    multiple
                   />
                   <input
                     className="upload-file-input"
@@ -459,13 +493,15 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                       document.getElementById("selectedFile").click()
                     }
                   />
-                  {errors.photo && (
-                    <p className="error-input-message">
+                  {errors.files && (
+                    <p className="error-input-file-message">
                       *Berkas dokumen surat izin belum dipilih
                     </p>
                   )}
 
-                  {photo && <p>{filename}</p>}
+                  {files && filename !== 0 && (
+                    <p className="files-label">{filename} berkas terpilih</p>
+                  )}
                 </div>
               </div>
             </div>
