@@ -1,7 +1,7 @@
 {
   "name": "irural-landing-page",
   "version": "0.1.0",
-  "proxy": "http://localhost:3000",
+  "proxy": "100.25.223.57:3000",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -21,7 +21,7 @@
     "redux-promise-middleware": "^6.1.2"
   },
   "scripts": {
-    "start": "npm run build && (cd server && nodemon)",
+    "start": "react-scripts start",
     "start-client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
