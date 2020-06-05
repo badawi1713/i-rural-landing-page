@@ -179,7 +179,11 @@ const RegisterPage = (props) => {
   return (
     <div>
       <SideBar contactScroll="home" />
-      <NavBar contactScroll="home" openNav={() => openNav()} />
+      <NavBar
+        message={onSubmit}
+        contactScroll="home"
+        openNav={() => openNav()}
+      />
       <div onClick={() => closeNav()}>
         {!onSubmit ? (
           <section id="registration" className="form-section">

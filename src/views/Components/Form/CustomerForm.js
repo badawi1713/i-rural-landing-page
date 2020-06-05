@@ -22,7 +22,7 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [location, setLocation] = useState("");
+  const [locationAddress, setLocationAddress] = useState("");
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -41,12 +41,13 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
           })
           .then((data) => {
             console.log(data);
-            setLocation(data.display_name);
+            // setLocation([latitude, longitude]);
+            setLocationAddress(data.display_name);
           })
           .catch((error) => alert(error));
       }, handleLocationError);
     } else {
-      alert("Geolocation is not supported by this browser");
+      alert("Fitur Geolocation tidak didukung oleh browser anda");
     }
   };
 
@@ -79,6 +80,7 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
   };
 
   const customerRegistrationSubmit = async (e) => {
+    const location = `[${latitude},${longitude}]`;
     const data = {
       name,
       identity_number,
@@ -88,7 +90,7 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
       subdistrict,
       zip_code,
       address,
-      // location,
+      location,
     };
 
     dispatch(customerRegistration(data))
@@ -316,7 +318,7 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="_code"
+                    name="zip_code"
                     onChange={(e) => {
                       setZipCode(e.target.value);
                     }}
@@ -386,11 +388,10 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
                       <textarea
                         onChange={(e) => {
                           e.preventDefault();
-                          setLocation(e.target.value);
+                          setLocationAddress(e.target.value);
                         }}
-                        value={location}
+                        value={locationAddress}
                       ></textarea>
-
                       {/* <div className="message">
                         <p>
                           *Bagikan lokasi kamu supaya tim I-RURAL bisa

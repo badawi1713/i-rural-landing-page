@@ -6,7 +6,7 @@ import "./Navbar.css";
 
 import Logo from "../../../assets/images/irural-logo.jpeg";
 
-const Navbar = ({ openNav, contactScroll }) => {
+const Navbar = ({ openNav, contactScroll, message }) => {
   return (
     <nav>
       <section className="navbar-section">
@@ -81,18 +81,30 @@ const Navbar = ({ openNav, contactScroll }) => {
             </ul>
           </div>
           <div className="navbar-button">
-            <Scroll
-              activeClass="active"
-              to="registration"
-              spy={true}
-              smooth={true}
-              offset={0}
-              duration={30}
-            >
-              <Link to={{ pathname: "/register", userFormActive: true }}>
+            {message ? (
+              <Link
+                to={{
+                  pathname: "/register",
+                  messageActive: false,
+                  userFormActive: true,
+                }}
+              >
                 <button>Daftar I-RURAL</button>
               </Link>
-            </Scroll>
+            ) : (
+              <Scroll
+                activeClass="active"
+                to="registration"
+                spy={true}
+                smooth={true}
+                offset={0}
+                duration={30}
+              >
+                <Link to={{ pathname: "/register", userFormActive: true }}>
+                  <button>Daftar I-RURAL</button>
+                </Link>
+              </Scroll>
+            )}
           </div>
         </div>
       </section>

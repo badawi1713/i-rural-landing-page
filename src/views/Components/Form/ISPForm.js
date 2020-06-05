@@ -27,7 +27,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
   const [filename, setFilename] = useState([]);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [location, setLocation] = useState("");
+  const [locationAddress, setLocationAddress] = useState("");
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -46,12 +46,12 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
           })
           .then((data) => {
             console.log(data);
-            setLocation(data.display_name);
+            setLocationAddress(data.display_name);
           })
           .catch((error) => alert(error));
       }, handleLocationError);
     } else {
-      alert("Geolocation is not supported by this browser");
+      alert("Fitur Geolocation tidak didukung oleh browser anda");
     }
   };
 
@@ -111,7 +111,12 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
   };
 
   const ispRegistrationSubmit = (e) => {
+    const name = isp_contact_person_name;
+    const address = isp_address;
+    const location = `[${latitude},${longitude}]`;
     const ispData = {
+      name,
+      address,
       isp_name,
       isp_contact_person_name,
       isp_contact_number,
@@ -415,9 +420,9 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                         name="currentLocation"
                         onChange={(e) => {
                           e.preventDefault();
-                          setLocation(e.target.value);
+                          setLocationAddress(e.target.value);
                         }}
-                        value={location}
+                        value={locationAddress}
                       ></textarea>
                       {/* <div className="message">
                         <p>
