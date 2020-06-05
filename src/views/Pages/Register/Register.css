@@ -17,7 +17,7 @@ select:focus {
 
 .form-title p {
   font-style: normal;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 22px;
   color: #29293e;
 }
@@ -292,7 +292,7 @@ textarea {
 
   .form-title p {
     font-style: normal;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 30px;
     color: #29293e;
   }

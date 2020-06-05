@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import "./Register.css";
 
 import ISPForm from "../../Components/Form/ISPForm";
-import UserForm from "../../Components/Form/UserForm";
+import CustomerForm from "../../Components/Form/CustomerForm";
 import Message from "../../Components/Message/Message";
 import NavBar from "../../Components/NavBar/NavBar";
 import SideBar from "../../Components/SideBar/SideBar";
@@ -11,8 +11,8 @@ import Contact from "../../Components/Contact/Contact";
 import Footer from "../../Components/Footer/Footer";
 
 const RegisterPage = (props) => {
-  const [showUserForm, setShowUserForm] = useState(
-    props.location.userFormActive || true
+  const [showCustomerForm, setShowCustomerForm] = useState(
+    props.location.customerFormActive || true
   );
 
   const [onSubmit, setOnSubmit] = useState(false);
@@ -157,11 +157,11 @@ const RegisterPage = (props) => {
   ];
 
   const registerAsUser = () => {
-    setShowUserForm(true);
+    setShowCustomerForm(true);
   };
 
   const registerAsISP = () => {
-    setShowUserForm(false);
+    setShowCustomerForm(false);
   };
 
   const openNav = () => {
@@ -188,7 +188,7 @@ const RegisterPage = (props) => {
                 <div className="form-title">
                   <p>Daftar I-RURAL</p>
                 </div>
-                {showUserForm ? (
+                {showCustomerForm ? (
                   <div className="form-header-button">
                     <button onClick={() => registerAsUser()}>
                       Daftar Sebagai Pengguna
@@ -214,8 +214,8 @@ const RegisterPage = (props) => {
                   </div>
                 )}
               </div>
-              {showUserForm ? (
-                <UserForm
+              {showCustomerForm ? (
+                <CustomerForm
                   onSubmitState={() => onSubmitForm()}
                   provinceList={provinceData}
                 />

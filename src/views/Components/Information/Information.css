@@ -40,7 +40,7 @@
 
 .text-information h1 {
     direction: ltr;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 22px;
     margin-bottom: 10px;
     color: #29293e;
@@ -55,7 +55,7 @@
 }
 
 .configuration-steps h1 {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 22px;
     color: #29293e;
     line-height: 30px;
@@ -140,7 +140,7 @@
 
     .text-information h1 {
         font-size: 30px;
-        font-weight: bold;
+        font-weight: 600;
         margin-bottom: 25px;
         padding-right: 10px;
         line-height: 41px;
@@ -153,7 +153,7 @@
     }
 
     .configuration-steps h1 {
-        font-weight: bold;
+        font-weight: 600;
         font-size: 30px;
         color: #29293e;
         margin-bottom: 25px;

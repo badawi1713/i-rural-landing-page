@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { userRegistration } from "../../../Redux/actions/registration";
+import { customerRegistration } from "../../../Redux/actions/registration";
 
 import { useForm } from "react-hook-form";
 
-const UserForm = ({ provinceList, onSubmitState }) => {
+const CustomerForm = ({ provinceList, onSubmitState }) => {
   const { register, handleSubmit, errors } = useForm();
 
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
     return null;
   };
 
-  const userRegistrationSubmit = async (e) => {
+  const customerRegistrationSubmit = async (e) => {
     const data = {
       name,
       identity_number,
@@ -91,7 +91,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
       // location,
     };
 
-    dispatch(userRegistration(data))
+    dispatch(customerRegistration(data))
       .then(onSubmitState)
       .catch((error) => {
         console.log(error);
@@ -100,7 +100,10 @@ const UserForm = ({ provinceList, onSubmitState }) => {
   };
 
   return (
-    <form className="form-body" onSubmit={handleSubmit(userRegistrationSubmit)}>
+    <form
+      className="form-body"
+      onSubmit={handleSubmit(customerRegistrationSubmit)}
+    >
       <div className="form-body-group">
         <div className="form-body-content">
           <div className="form-title">
@@ -414,7 +417,7 @@ const UserForm = ({ provinceList, onSubmitState }) => {
 
       <div className="submit-button">
         <button type="submit">
-          {/* onClick={() => userRegistrationSubmit()} */}
+          {/* onClick={() => customerRegistrationSubmit()} */}
           Daftar Sebagai Pengguna
         </button>
       </div>
@@ -422,4 +425,4 @@ const UserForm = ({ provinceList, onSubmitState }) => {
   );
 };
 
-export default UserForm;
+export default CustomerForm;

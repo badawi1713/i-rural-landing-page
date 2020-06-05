@@ -1,5 +1,5 @@
 const initialValue = {
-  userRegistrationData: [],
+  customerRegistrationData: [],
   ispRegistrationData: [],
   ispFilesData: [],
   errorMessage: [],
@@ -10,7 +10,7 @@ const initialValue = {
 
 const registrationReducers = (state = initialValue, action) => {
   switch (action.type) {
-    case "POST_USER_REGISTRATION_PENDING":
+    case "POST_CUSTOMER_REGISTRATION_PENDING":
       return {
         ...state,
         isPending: true,
@@ -18,7 +18,7 @@ const registrationReducers = (state = initialValue, action) => {
         isFulfilled: false,
       };
 
-    case "POST_USER_REGISTRATION_REJECTED":
+    case "POST_CUSTOMER_REGISTRATION_REJECTED":
       return {
         ...state,
         isPending: false,
@@ -26,12 +26,12 @@ const registrationReducers = (state = initialValue, action) => {
         errorMessage: action.payload.data,
       };
 
-    case "POST_USER_REGISTRATION_FULFILLED":
+    case "POST_CUSTOMER_REGISTRATION_FULFILLED":
       return {
         ...state,
         isPending: false,
         isFulfilled: true,
-        userRegistrationData: action.payload,
+        customerRegistrationData: action.payload,
       };
     case "POST_ISP_REGISTRATION_PENDING":
       return {

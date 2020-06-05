@@ -15,19 +15,16 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
 
   const { register, handleSubmit, errors } = useForm();
   const [isp_name, setIspName] = useState("");
-  const [name, setName] = useState("");
+  const [isp_contact_person_name, setContactPersonName] = useState("");
   const [isp_contact_number, setIspContactNumber] = useState("");
   const [isp_email, setIspEmail] = useState("");
   const [province, setProvince] = useState("");
   const [subdistrict, setSubdistrict] = useState("");
   const [zip_code, setZipCode] = useState("");
-  const [address, setAddress] = useState("");
+  const [isp_address, setIspAddress] = useState("");
   // const [filename, setFilename] = useState(null);
-  // const [photo, setIspFiles] = useState(null);
-
   const [files, setFiles] = useState("");
   const [filename, setFilename] = useState([]);
-
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [location, setLocation] = useState("");
@@ -116,13 +113,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
   const ispRegistrationSubmit = (e) => {
     const ispData = {
       isp_name,
-      name,
+      isp_contact_person_name,
       isp_contact_number,
       isp_email,
       province,
       subdistrict,
       zip_code,
-      address,
+      isp_address,
       location,
     };
 
@@ -221,13 +218,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="name"
+                    name="isp_contact_person_name"
                     onChange={(e) => {
-                      setName(e.target.value);
+                      setContactPersonName(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.name && (
+                  {errors.isp_contact_person_name && (
                     <p className="error-input-message">
                       *Contact person tidak boleh kosong
                     </p>
@@ -380,12 +377,12 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
               <div className="form-input">
                 <textarea
                   ref={register({ required: true })}
-                  name="address"
+                  name="isp_address"
                   onChange={(e) => {
-                    setAddress(e.target.value);
+                    setIspAddress(e.target.value);
                   }}
                 ></textarea>
-                {errors.address && (
+                {errors.isp_address && (
                   <p className="error-input-message">
                     *Alamat lengkap tidak boleh kosong
                   </p>
@@ -429,9 +426,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                         </p>
                       </div> */}
                     </div>
-                  ) : (
-                    <></>
-                  )}
+                  ) : null}
                   <button type="button" onClick={() => getLocation()}>
                     Bagikan Lokasi
                   </button>
