@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5f9e607d.chunk.css",
+    "main.js": "/static/js/main.c1ffd77f.chunk.js",
+    "main.js.map": "/static/js/main.c1ffd77f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.febd39c3.js",
+    "runtime-main.js.map": "/static/js/runtime-main.febd39c3.js.map",
+    "static/js/2.24b06fb2.chunk.js": "/static/js/2.24b06fb2.chunk.js",
+    "static/js/2.24b06fb2.chunk.js.map": "/static/js/2.24b06fb2.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.dcea93b17b4e09d0fa676f3b03b0e1ad.js": "/precache-manifest.dcea93b17b4e09d0fa676f3b03b0e1ad.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.5f9e607d.chunk.css.map": "/static/css/main.5f9e607d.chunk.css.map",
+    "static/js/2.24b06fb2.chunk.js.LICENSE.txt": "/static/js/2.24b06fb2.chunk.js.LICENSE.txt",
+    "static/media/Register.css": "/static/media/router-icon.1d4f0950.svg",
+    "static/media/Contact.css": "/static/media/small-contact-background.0e2cc935.svg",
+    "static/media/facebook-logo.svg": "/static/media/facebook-logo.d97727c6.svg",
+    "static/media/Header.css": "/static/media/small-hero-background.8f041960.png",
+    "static/media/i-rural-config.jpg": "/static/media/i-rural-config.8c0b9e06.jpg",
+    "static/media/instagram-logo.svg": "/static/media/instagram-logo.694b8131.svg",
+    "static/media/irural-logo.jpeg": "/static/media/irural-logo.5dcf0ac1.jpeg",
+    "static/media/linkedin-logo.svg": "/static/media/linkedin-logo.4bb9878f.svg",
+    "static/media/Information.css": "/static/media/wifi-illustration.62544e8a.svg",
+    "static/media/twitter-logo.svg": "/static/media/twitter-logo.38ece7b5.svg",
+    "static/media/Message.css": "/static/media/waiting-illustration.b117265f.svg",
+    "static/media/whatsapp-logo.svg": "/static/media/whatsapp-logo.75574f55.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.febd39c3.js",
+    "static/js/2.24b06fb2.chunk.js",
+    "static/css/main.5f9e607d.chunk.css",
+    "static/js/main.c1ffd77f.chunk.js"
+  ]
+}
