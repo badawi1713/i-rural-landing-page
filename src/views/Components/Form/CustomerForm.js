@@ -105,6 +105,7 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
     <form
       className="form-body"
       onSubmit={handleSubmit(customerRegistrationSubmit)}
+      noValidate
     >
       <div className="form-body-group">
         <div className="form-body-content">
@@ -229,7 +230,7 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
                     </p>
                   )}
                   {errors.email && errors.email.type === "pattern" && (
-                    <p className="error-input-message">Format email salah</p>
+                    <p className="error-input-message">*Format email salah</p>
                   )}
                 </div>
               </div>

@@ -4,10 +4,7 @@ import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 import { useDispatch } from "react-redux";
-import {
-  ispRegistration,
-  uploadIspFile,
-} from "../../../Redux/actions/registration";
+import { ispRegistration } from "../../../Redux/actions/registration";
 
 const ISPForm = ({ provinceList, onSubmitState }) => {
   const dispatch = useDispatch();
@@ -22,12 +19,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
   const [subdistrict, setSubdistrict] = useState("");
   const [zip_code, setZipCode] = useState("");
   const [isp_address, setIspAddress] = useState("");
-  // const [filename, setFilename] = useState(null);
-  const [files, setFiles] = useState("");
-  const [filename, setFilename] = useState([]);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [locationAddress, setLocationAddress] = useState("");
+
+  const [fileCount, setFileCount] = useState(0);
+
+  const [files, setFiles] = useState([]);
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -83,52 +81,34 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
     return null;
   };
 
-  const inputFileHandler = (e) => {
+  const handleUploadFile = (e) => {
     setFiles(e.target.files);
-    setFilename(e.target.files.length);
-
-    fileUploadHandler();
+    setFileCount(e.target.files.length);
   };
 
-  const fileUploadHandler = (e) => {
-    // e.preventDefault();
-    const filesData = new FormData();
-
-    for (const key of Object.keys(files)) {
-      filesData.append("file", files[key]);
-    }
-
-    dispatch(uploadIspFile(filesData))
-      // .then(onSubmitState)
-      .then((res) => {
-        console.log(res);
-        console.log("file", filesData);
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("Sedang terjadi kesalahan pada server, silahkan coba lagi.");
-      });
-  };
-
-  const ispRegistrationSubmit = (e) => {
+  const ispRegistrationSubmit = async (e) => {
     const name = isp_contact_person_name;
     const address = isp_address;
     const location = `[${latitude},${longitude}]`;
-    const ispData = {
-      name,
-      address,
-      isp_name,
-      isp_contact_person_name,
-      isp_contact_number,
-      isp_email,
-      province,
-      subdistrict,
-      zip_code,
-      isp_address,
-      location,
-    };
 
-    dispatch(ispRegistration(ispData))
+    // let formData = files;
+    // let fileUploadData = files;
+    let formData = await new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append(`file_url[${i}]`, files[i]);
+    }
+    formData.append("name", name);
+    formData.append("address", address);
+    formData.append("isp_name", isp_name);
+    formData.append("isp_contact_person_name", isp_contact_person_name);
+    formData.append("isp_contact_number", isp_contact_number);
+    formData.append("isp_email", isp_email);
+    formData.append("province", province);
+    formData.append("subdistrict", subdistrict);
+    formData.append("zip_code", zip_code);
+    formData.append("location", location);
+
+    await dispatch(ispRegistration(formData))
       .then(onSubmitState)
       .then((res) => console.log(res))
       .catch((error) => {
@@ -138,7 +118,11 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
   };
 
   return (
-    <form className="form-body" onSubmit={handleSubmit(ispRegistrationSubmit)}>
+    <form
+      noValidate
+      className="form-body"
+      onSubmit={handleSubmit(ispRegistrationSubmit)}
+    >
       <div className="form-body-group">
         <div className="form-body-content">
           <div className="form-title">
@@ -478,10 +462,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                     ref={(fileInput, register({ required: true }))}
                     name="files"
                     onChange={(e) => {
-                      inputFileHandler(e);
-                      // setIspFiles(e.target.files[0]);
-                      // setFilename(e.target.value);
-                      // console.log(files[0].name);
+                      handleUploadFile(e);
                     }}
                     multiple
                   />
@@ -499,8 +480,8 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                     </p>
                   )}
 
-                  {files && filename !== 0 && (
-                    <p className="files-label">{filename} berkas terpilih</p>
+                  {files && fileCount !== 0 && (
+                    <p className="files-label">{fileCount} berkas terpilih</p>
                   )}
                 </div>
               </div>
