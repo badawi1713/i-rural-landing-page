@@ -27,6 +27,8 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
 
   const [files, setFiles] = useState([]);
 
+  const [filesExtensionError, setFilesExtensionError] = useState(false);
+
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async function (position) {
@@ -84,6 +86,20 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
   const handleUploadFile = (e) => {
     setFiles(e.target.files);
     setFileCount(e.target.files.length);
+    checkFileExtension();
+    return false;
+  };
+
+  const checkFileExtension = () => {
+    let files = document.querySelector("#selectedFile");
+    if (files.files.length === 0) {
+      setFilesExtensionError(false);
+    } else if (/\.(pdf)$/i.test(files.files[0].name) === false) {
+      setFilesExtensionError(true);
+    } else {
+      setFilesExtensionError(false);
+    }
+    return false;
   };
 
   const ispRegistrationSubmit = async (e) => {
@@ -113,7 +129,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
       .then((res) => console.log(res))
       .catch((error) => {
         console.log(error);
-        alert("Sedang terjadi kesalahan pada server, silahkan coba lagi.");
+        alert("Sedang terjadi kesalahan, silahkan periksa form anda kembali.");
       });
   };
 
@@ -483,6 +499,12 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                   {files && fileCount !== 0 && (
                     <p className="files-label">{fileCount} berkas terpilih</p>
                   )}
+
+                  {files && filesExtensionError ? (
+                    <p className="error-input-file-message">
+                      *Berkas harus dalam format .pdf
+                    </p>
+                  ) : null}
                 </div>
               </div>
             </div>
