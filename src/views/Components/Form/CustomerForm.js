@@ -97,7 +97,9 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
       .then(onSubmitState)
       .catch((error) => {
         console.log(error);
-        alert("Sedang terjadi kesalahan pada server, silahkan coba lagi.");
+        alert(
+          "Sedang terjadi kesalahan dalam pengiriman data, silahkan coba kembali."
+        );
       });
   };
 

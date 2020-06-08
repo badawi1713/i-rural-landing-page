@@ -107,8 +107,6 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
     const address = isp_address;
     const location = `[${latitude},${longitude}]`;
 
-    // let formData = files;
-    // let fileUploadData = files;
     let formData = await new FormData();
     for (let i = 0; i < files.length; i++) {
       formData.append(`file_url[${i}]`, files[i]);
@@ -116,6 +114,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
     formData.append("name", name);
     formData.append("address", address);
     formData.append("isp_name", isp_name);
+    formData.append("isp_address", isp_address);
     formData.append("isp_contact_person_name", isp_contact_person_name);
     formData.append("isp_contact_number", isp_contact_number);
     formData.append("isp_email", isp_email);
@@ -129,7 +128,9 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
       .then((res) => console.log(res))
       .catch((error) => {
         console.log(error);
-        alert("Sedang terjadi kesalahan, silahkan periksa form anda kembali.");
+        alert(
+          "Sedang terjadi kesalahan dalam pengiriman data, silahkan coba kembali."
+        );
       });
   };
 
