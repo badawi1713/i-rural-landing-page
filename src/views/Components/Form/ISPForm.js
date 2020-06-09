@@ -92,14 +92,18 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
 
   const checkFileExtension = () => {
     let files = document.querySelector("#selectedFile");
-    if (files.files.length === 0) {
-      setFilesExtensionError(false);
-    } else if (/\.(pdf)$/i.test(files.files[0].name) === false) {
-      setFilesExtensionError(true);
-    } else {
-      setFilesExtensionError(false);
+
+    for (var i = 0; i < files.files.length; i++) {
+      var ext = files.files[i].name.substr(-3);
+      if (ext !== "pdf") {
+        setFilesExtensionError(true);
+        return false;
+      } else if (files.files.length === 0) {
+        setFilesExtensionError(false);
+      } else {
+        setFilesExtensionError(false);
+      }
     }
-    return false;
   };
 
   const ispRegistrationSubmit = async (e) => {
