@@ -98,11 +98,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
       if (ext !== "pdf") {
         setFilesExtensionError(true);
         return false;
-      } else if (files.files.length === 0) {
-        setFilesExtensionError(false);
-      } else {
-        setFilesExtensionError(false);
       }
+    }
+
+    if (files.files.length === 0) {
+      setFilesExtensionError(false);
+    } else {
+      setFilesExtensionError(false);
     }
   };
 
