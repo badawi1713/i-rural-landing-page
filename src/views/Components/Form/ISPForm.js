@@ -24,10 +24,10 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
   const [locationAddress, setLocationAddress] = useState("");
 
   const [fileCount, setFileCount] = useState(0);
-
   const [files, setFiles] = useState([]);
-
   const [filesExtensionError, setFilesExtensionError] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -128,12 +128,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
     formData.append("subdistrict", subdistrict);
     formData.append("zip_code", zip_code);
     formData.append("location", location);
-
+    setIsLoading(true);
     await dispatch(ispRegistration(formData))
       .then(onSubmitState)
       .then((res) => console.log(res))
       .catch((error) => {
         console.log(error);
+        setIsLoading(false);
         alert(
           "Sedang terjadi kesalahan dalam pengiriman data, silahkan coba kembali."
         );
@@ -519,9 +520,18 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
         </div>
       </div>
 
-      <div className="submit-button">
-        <button type="submit">Daftar Sebagai ISP</button>
-      </div>
+      {isLoading ? (
+        <div className="submit-button">
+          <button type="submit">
+            <div className="loading-gif" />
+            <p>Mengirim Data</p>
+          </button>
+        </div>
+      ) : (
+        <div className="submit-button">
+          <button type="submit">Daftar Sebagai ISP</button>
+        </div>
+      )}
     </form>
   );
 };

@@ -271,6 +271,17 @@ textarea {
   color: #ffffff;
   cursor: pointer;
   width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.submit-button button .loading-gif {
+  height: 20px;
+  width: 25px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("../../../assets/svg/loading.svg");
 }
 
 .active-button {
@@ -533,7 +544,17 @@ textarea {
     color: #ffffff;
     cursor: pointer;
     width: auto;
+
   }
+
+  .submit-button button .loading-gif {
+    height: 25px;
+    width: 25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../../../assets/svg/loading.svg");
+  }
+
 
   .active-button {
     background-color: #ed5f64;

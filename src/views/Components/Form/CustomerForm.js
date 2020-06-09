@@ -24,6 +24,8 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
   const [longitude, setLongitude] = useState(null);
   const [locationAddress, setLocationAddress] = useState("");
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async function (position) {
@@ -41,7 +43,6 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
           })
           .then((data) => {
             console.log(data);
-            // setLocation([latitude, longitude]);
             setLocationAddress(data.display_name);
           })
           .catch((error) => alert(error));
@@ -93,9 +94,12 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
       location,
     };
 
+    setIsLoading(true);
+
     dispatch(customerRegistration(data))
       .then(onSubmitState)
       .catch((error) => {
+        setIsLoading(false);
         console.log(error);
         alert(
           "Sedang terjadi kesalahan dalam pengiriman data, silahkan coba kembali."
@@ -419,12 +423,18 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
         </div>
       </div>
 
-      <div className="submit-button">
-        <button type="submit">
-          {/* onClick={() => customerRegistrationSubmit()} */}
-          Daftar Sebagai Pengguna
-        </button>
-      </div>
+      {isLoading ? (
+        <div className="submit-button">
+          <button type="submit">
+            <div className="loading-gif" />
+            <p>Mengirim Data</p>
+          </button>
+        </div>
+      ) : (
+        <div className="submit-button">
+          <button type="submit">Daftar Sebagai Pengguna</button>
+        </div>
+      )}
     </form>
   );
 };
