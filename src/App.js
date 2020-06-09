@@ -6,6 +6,7 @@ import store from "./Redux/store";
 
 import Home from "./views/Pages/Home/Home";
 import Register from "./views/Pages/Register/Register";
+import ScrollToTop from "./views/Components/Scroll/Scroll";
 
 import "./App.css";
 
@@ -13,6 +14,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
+        <ScrollToTop />
         <Switch>
           <Route path="/" exact render={(props) => <Home {...props} />} />
           <Route

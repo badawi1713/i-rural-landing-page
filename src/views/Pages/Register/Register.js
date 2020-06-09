@@ -173,6 +173,7 @@ const RegisterPage = (props) => {
   };
 
   const onSubmitForm = () => {
+    window.scrollTo(0, 0);
     setOnSubmit(true);
   };
 
