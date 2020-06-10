@@ -522,7 +522,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
 
       {isLoading ? (
         <div className="submit-button">
-          <button type="submit">
+          <button type="button">
             <div className="loading-gif" />
             <p>Mengirim Data</p>
           </button>
