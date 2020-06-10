@@ -81,17 +81,7 @@ const Navbar = ({ openNav, contactScroll, message }) => {
             </ul>
           </div>
           <div className="navbar-button">
-            {message ? (
-              <Link
-                to={{
-                  pathname: "/register",
-                  messageActive: false,
-                  userFormActive: true,
-                }}
-              >
-                <button>Daftar I-RURAL</button>
-              </Link>
-            ) : (
+            {message ? null : (
               <Scroll
                 activeClass="active"
                 to="registration"
