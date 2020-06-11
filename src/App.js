@@ -8,6 +8,9 @@ import Home from "./views/Pages/Home/Home";
 import Register from "./views/Pages/Register/Register";
 import ScrollToTop from "./views/Components/Scroll/Scroll";
 
+// Google Analytics HOC Technique
+import withPageView from "./utils/withPageView";
+
 import "./App.css";
 
 const App = () => {
@@ -16,11 +19,17 @@ const App = () => {
       <Router>
         <ScrollToTop />
         <Switch>
-          <Route path="/" exact render={(props) => <Home {...props} />} />
+          <Route
+            path="/"
+            exact
+            render={(props) => <Home {...props} />}
+            component={withPageView(Home)}
+          />
           <Route
             path="/register"
             exact
             render={(props) => <Register userFormActive={true} {...props} />}
+            component={withPageView(Register)}
           />
         </Switch>
       </Router>

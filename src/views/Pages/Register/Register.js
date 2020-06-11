@@ -179,7 +179,7 @@ const RegisterPage = (props) => {
 
   return (
     <div>
-      <SideBar contactScroll="home" />
+      <SideBar message={onSubmit} contactScroll="home" />
       <NavBar
         message={onSubmit}
         contactScroll="home"
