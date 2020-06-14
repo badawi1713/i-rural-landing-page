@@ -162,18 +162,25 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
                 </label>
                 <div className="form-input">
                   <input
-                    ref={register({ required: true })}
+                    ref={register({ required: true, pattern: /^[0-9]*$/i })}
                     name="identity_number"
                     onChange={(e) => {
                       setIdentityNumber(e.target.value);
                     }}
-                    type="number"
+                    type="text"
                   />
-                  {errors.identity_number && (
-                    <p className="error-input-message">
-                      *No KTP tidak boleh kosong
-                    </p>
-                  )}
+                  {errors.identity_number &&
+                    errors.identity_number.type === "required" && (
+                      <p className="error-input-message">
+                        *Nomor KTP tidak boleh kosong
+                      </p>
+                    )}
+                  {errors.identity_number &&
+                    errors.identity_number.type === "pattern" && (
+                      <p className="error-input-message">
+                        *Format nomor KTP salah
+                      </p>
+                    )}
                 </div>
               </div>
               <div className="form-input-content">
@@ -192,18 +199,26 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
                   <input
                     ref={register({
                       required: true,
+                      pattern: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/i,
                     })}
                     name="contact_number"
                     onChange={(e) => {
                       setContactNumber(e.target.value);
                     }}
-                    type="number"
+                    type="text"
                   />
-                  {errors.contact_number && (
-                    <p className="error-input-message">
-                      *Nomor telepon tidak boleh kosong
-                    </p>
-                  )}
+                  {errors.contact_number &&
+                    errors.contact_number.type === "required" && (
+                      <p className="error-input-message">
+                        *Nomor telepon tidak boleh kosong
+                      </p>
+                    )}
+                  {errors.contact_number &&
+                    errors.contact_number.type === "pattern" && (
+                      <p className="error-input-message">
+                        *Format nomor telepon salah
+                      </p>
+                    )}
                 </div>
               </div>
               <div className="form-input-content">
@@ -324,16 +339,21 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
                 </label>
                 <div className="form-input">
                   <input
-                    ref={register({ required: true })}
+                    ref={register({ required: true, pattern: /^[0-9]*$/i })}
                     name="zip_code"
                     onChange={(e) => {
                       setZipCode(e.target.value);
                     }}
-                    type="number"
+                    type="text"
                   />
-                  {errors.zip_code && (
+                  {errors.zip_code && errors.zip_code.type === "required" && (
                     <p className="error-input-message">
-                      *Kode pos tidak boleh kosong
+                      *Kode POS tidak boleh kosong
+                    </p>
+                  )}
+                  {errors.zip_code && errors.zip_code.type === "pattern" && (
+                    <p className="error-input-message">
+                      *Format kode POS salah
                     </p>
                   )}
                 </div>

@@ -260,18 +260,26 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                   <input
                     ref={register({
                       required: true,
+                      pattern: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/i,
                     })}
                     name="isp_contact_number"
                     onChange={(e) => {
                       setIspContactNumber(e.target.value);
                     }}
-                    type="number"
+                    type="text"
                   />
-                  {errors.isp_contact_number && (
-                    <p className="error-input-message">
-                      *Nomor telepon tidak boleh kosong
-                    </p>
-                  )}
+                  {errors.isp_contact_number &&
+                    errors.isp_contact_number.type === "required" && (
+                      <p className="error-input-message">
+                        *Nomor telepon tidak boleh kosong
+                      </p>
+                    )}
+                  {errors.isp_contact_number &&
+                    errors.isp_contact_number.type === "pattern" && (
+                      <p className="error-input-message">
+                        *Format nomor telepon salah
+                      </p>
+                    )}
                 </div>
               </div>
             </div>
@@ -358,16 +366,22 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                 </label>
                 <div className="form-input">
                   <input
-                    ref={register({ required: true })}
+                    ref={register({ required: true, pattern: /^[0-9]*$/i })}
                     name="zip_code"
                     onChange={(e) => {
                       setZipCode(e.target.value);
                     }}
-                    type="number"
+                    type="text"
                   />
-                  {errors.zip_code && (
+
+                  {errors.zip_code && errors.zip_code.type === "required" && (
                     <p className="error-input-message">
-                      *Kode pos tidak boleh kosong
+                      *Kode POS tidak boleh kosong
+                    </p>
+                  )}
+                  {errors.zip_code && errors.zip_code.type === "pattern" && (
+                    <p className="error-input-message">
+                      *Format kode POS salah
                     </p>
                   )}
                 </div>
