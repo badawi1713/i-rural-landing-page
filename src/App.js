@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 import { Provider } from "react-redux";
 import store from "./Redux/store";
@@ -31,6 +36,7 @@ const App = () => {
             render={(props) => <Register userFormActive={true} {...props} />}
             component={withPageView(Register)}
           />
+          <Redirect to="/" />
         </Switch>
       </Router>
     </Provider>
