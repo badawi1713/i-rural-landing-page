@@ -16,8 +16,8 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
   const [contact_number, setContactNumber] = useState("");
   const [email, setEmail] = useState("");
   const [province, setProvince] = useState("");
-  const [subdistrict, setSubdistrict] = useState("");
-  const [urbanVillage, setUrbanVillage] = useState("");
+  const [sub_district, setSubdistrict] = useState("");
+  const [urban_village, setUrbanVillage] = useState("");
   const [zip_code, setZipCode] = useState("");
   const [address, setAddress] = useState("");
 
@@ -89,8 +89,8 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
       contact_number,
       email,
       province,
-      subdistrict,
-      urbanVillage,
+      sub_district,
+      urban_village,
       zip_code,
       address,
       location,
@@ -319,13 +319,13 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="subdistrict"
+                    name="sub_district"
                     onChange={(e) => {
                       setSubdistrict(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.subdistrict && (
+                  {errors.sub_district && (
                     <p className="error-input-message">
                       *Kecamatan tidak boleh kosong
                     </p>
@@ -344,13 +344,13 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="urbanVillage"
+                    name="urban_village"
                     onChange={(e) => {
                       setUrbanVillage(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.urbanVillage && (
+                  {errors.urban_village && (
                     <p className="error-input-message">
                       *Kelurahan tidak boleh kosong
                     </p>

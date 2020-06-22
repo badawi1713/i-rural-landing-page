@@ -16,8 +16,8 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
   const [isp_contact_number, setIspContactNumber] = useState("");
   const [isp_email, setIspEmail] = useState("");
   const [province, setProvince] = useState("");
-  const [subdistrict, setSubdistrict] = useState("");
-  const [urbanVillage, setUrbanVillage] = useState("");
+  const [sub_district, setSubdistrict] = useState("");
+  const [urban_village, setUrbanVillage] = useState("");
   const [zip_code, setZipCode] = useState("");
   const [isp_address, setIspAddress] = useState("");
   const [latitude, setLatitude] = useState(null);
@@ -126,8 +126,8 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
     formData.append("isp_contact_number", isp_contact_number);
     formData.append("isp_email", isp_email);
     formData.append("province", province);
-    formData.append("subdistrict", subdistrict);
-    formData.append("urbanVillage", urbanVillage);
+    formData.append("sub_district", sub_district);
+    formData.append("urban_village", urban_village);
     formData.append("zip_code", zip_code);
     formData.append("location", location);
     setIsLoading(true);
@@ -346,13 +346,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="subdistrict"
+                    name="sub_district"
                     onChange={(e) => {
                       setSubdistrict(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.subdistrict && (
+                  {errors.sub_district && (
                     <p className="error-input-message">
                       *Kecamatan tidak boleh kosong
                     </p>
@@ -371,13 +371,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="urbanVillage"
+                    name="urban_village"
                     onChange={(e) => {
                       setUrbanVillage(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.urbanVillage && (
+                  {errors.urban_village && (
                     <p className="error-input-message">
                       *Kelurahan tidak boleh kosong
                     </p>
