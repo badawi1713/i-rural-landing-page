@@ -157,8 +157,7 @@ textarea {
   -moz-appearance: none;
   background-repeat: no-repeat;
   background-image: url("../../../assets/svg/arrow-icon.svg");
-  background-position: 95% center;
-
+  background-position: 96% center;
   cursor: pointer;
 }
 
@@ -435,7 +434,7 @@ textarea {
     -moz-appearance: none;
     background-repeat: no-repeat;
     background-image: url("../../../assets/svg/arrow-icon.svg");
-    background-position: 95% center;
+    background-position: 98% center;
 
     cursor: pointer;
   }

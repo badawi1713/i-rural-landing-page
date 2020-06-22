@@ -17,6 +17,7 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
   const [email, setEmail] = useState("");
   const [province, setProvince] = useState("");
   const [subdistrict, setSubdistrict] = useState("");
+  const [urbanVillage, setUrbanVillage] = useState("");
   const [zip_code, setZipCode] = useState("");
   const [address, setAddress] = useState("");
 
@@ -89,6 +90,7 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
       email,
       province,
       subdistrict,
+      urbanVillage,
       zip_code,
       address,
       location,
@@ -266,39 +268,66 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
             <p>Alamat</p>
           </div>
           <div className="form-input-group">
+            <div className="form-input-content">
+              <label className="form-input-label">
+                <p>
+                  Provinsi{" "}
+                  <span title="Harus diisi" className="input-info">
+                    *
+                  </span>
+                </p>
+              </label>
+              <div className="form-input">
+                <select
+                  ref={register({ required: true })}
+                  onChange={(e) => {
+                    setProvince(e.target.value);
+                  }}
+                  name="province"
+                >
+                  <option value="">Pilih Provinsi</option>
+                  {provinceList.length < 1 ? (
+                    <option value="0">Data Provinsi Kosong</option>
+                  ) : (
+                    provinceList &&
+                    provinceList.map((item) => (
+                      <option key={item.id} value={item.name}>
+                        {item.name}
+                      </option>
+                    ))
+                  )}
+                </select>
+                {errors.province && (
+                  <p className="error-input-message">
+                    *Provinsi tidak boleh kosong
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="form-input-group">
             <div className="address-group">
               <div className="form-input-content">
                 <label className="form-input-label">
                   <p>
-                    Provinsi{" "}
+                    Kecamatan{" "}
                     <span title="Harus diisi" className="input-info">
                       *
                     </span>
                   </p>
                 </label>
                 <div className="form-input">
-                  <select
+                  <input
                     ref={register({ required: true })}
+                    name="subdistrict"
                     onChange={(e) => {
-                      setProvince(e.target.value);
+                      setSubdistrict(e.target.value);
                     }}
-                    name="province"
-                  >
-                    <option value="">Pilih Provinsi</option>
-                    {provinceList.length < 1 ? (
-                      <option value="0">Data Provinsi Kosong</option>
-                    ) : (
-                      provinceList &&
-                      provinceList.map((item) => (
-                        <option key={item.id} value={item.name}>
-                          {item.name}
-                        </option>
-                      ))
-                    )}
-                  </select>
-                  {errors.province && (
+                    type="text"
+                  />
+                  {errors.subdistrict && (
                     <p className="error-input-message">
-                      *Provinsi tidak boleh kosong
+                      *Kecamatan tidak boleh kosong
                     </p>
                   )}
                 </div>
@@ -315,13 +344,13 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="subdistrict"
+                    name="urbanVillage"
                     onChange={(e) => {
-                      setSubdistrict(e.target.value);
+                      setUrbanVillage(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.subdistrict && (
+                  {errors.urbanVillage && (
                     <p className="error-input-message">
                       *Kelurahan tidak boleh kosong
                     </p>
