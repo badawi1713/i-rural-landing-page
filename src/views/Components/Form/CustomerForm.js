@@ -17,7 +17,7 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
   const [email, setEmail] = useState("");
   const [province, setProvince] = useState("");
   const [sub_district, setSubdistrict] = useState("");
-  const [urban_village, setUrbanVillage] = useState("");
+  const [urbanVillage, setUrbanVillage] = useState("");
   const [zip_code, setZipCode] = useState("");
   const [address, setAddress] = useState("");
 
@@ -90,7 +90,7 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
       email,
       province,
       sub_district,
-      urban_village,
+      urbanVillage,
       zip_code,
       address,
       location,
@@ -344,13 +344,13 @@ const CustomerForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="urban_village"
+                    name="urbanVillage"
                     onChange={(e) => {
                       setUrbanVillage(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.urban_village && (
+                  {errors.urbanVillage && (
                     <p className="error-input-message">
                       *Kelurahan tidak boleh kosong
                     </p>

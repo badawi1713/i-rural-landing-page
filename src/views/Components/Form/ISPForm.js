@@ -17,7 +17,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
   const [isp_email, setIspEmail] = useState("");
   const [province, setProvince] = useState("");
   const [sub_district, setSubdistrict] = useState("");
-  const [urban_village, setUrbanVillage] = useState("");
+  const [urbanVillage, setUrbanVillage] = useState("");
   const [zip_code, setZipCode] = useState("");
   const [isp_address, setIspAddress] = useState("");
   const [latitude, setLatitude] = useState(null);
@@ -127,7 +127,7 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
     formData.append("isp_email", isp_email);
     formData.append("province", province);
     formData.append("sub_district", sub_district);
-    formData.append("urban_village", urban_village);
+    formData.append("urbanVillage", urbanVillage);
     formData.append("zip_code", zip_code);
     formData.append("location", location);
     setIsLoading(true);
@@ -371,13 +371,13 @@ const ISPForm = ({ provinceList, onSubmitState }) => {
                 <div className="form-input">
                   <input
                     ref={register({ required: true })}
-                    name="urban_village"
+                    name="urbanVillage"
                     onChange={(e) => {
                       setUrbanVillage(e.target.value);
                     }}
                     type="text"
                   />
-                  {errors.urban_village && (
+                  {errors.urbanVillage && (
                     <p className="error-input-message">
                       *Kelurahan tidak boleh kosong
                     </p>
